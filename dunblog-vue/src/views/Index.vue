@@ -148,9 +148,6 @@
 </template>
 
 <script>
-import "./../../public/js/canvas/three.min.js"
-import "./../../public/js/canvas/canvas_lines.min.js"
-import "./../../public/js/canvas/index.js"
 import Sidebar from "@/components/Sidebar";
 export default {
   name: "Index",

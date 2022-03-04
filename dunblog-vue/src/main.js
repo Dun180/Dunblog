@@ -7,7 +7,8 @@ import VueAxios from 'vue-axios'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-// import "./axios"//请求拦截
+import "./../public/js/canvas/canvas_lines.min.js"
+import "./axios"//请求拦截
 // import "./permission"//路由拦截
 import "./../public/css/reset.css"
 import "./../public/font/icon/iconfont.css"

@@ -13,4 +13,10 @@ export class API {
         const resp = await axios.get(this.server_url+"/test");
         return resp.data.data
     }
+
+    //登录
+    async login(form){
+        const resp = await axios.post(this.server_url+"/login",form)
+        return resp
+    }
 }
