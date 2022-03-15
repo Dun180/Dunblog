@@ -1,0 +1,25 @@
+body {
+    font-size: 16px;
+}
+::selection {
+    background-color: palevioletred;
+    color: white;
+}
+.main {
+    background-color: #eee;
+}
+.el-container{
+    width: 75%;
+    margin: 0 auto;
+}
+.main-inner{
+    margin: 0 auto;
+    width: 75%;
+}
+.content-wrap{
+    float: right;
+    width: calc(100% - 252px);
+    height: 1660px;
+    box-sizing: border-box;
+
+}

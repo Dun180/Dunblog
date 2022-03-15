@@ -3,6 +3,9 @@ import Home from '../views/Home.vue'
 import Test from "@/views/Test";
 import Index from "@/views/Index";
 import Login from "@/views/Login";
+import Blog from "@/views/Blog";
+import BlogEdit from "@/views/BlogEdit";
+import Backstage from "@/views/Backstage";
 
 const routes = [
   {
@@ -27,6 +30,21 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/blog',
+    name: 'Blog',
+    component: Blog
+  },
+  {
+    path: '/blogedit',
+    name: 'BlogEdit',
+    component: BlogEdit
+  },
+  {
+    path: '/backstage',
+    name: 'Backstage',
+    component: Backstage
   },
 ]
 

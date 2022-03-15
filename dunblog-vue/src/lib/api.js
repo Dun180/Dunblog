@@ -19,4 +19,10 @@ export class API {
         const resp = await axios.post(this.server_url+"/login",form)
         return resp
     }
+
+    //
+    async blogEdit(form){
+        const resp = await axios.post(this.server_url+"/blogedit",form)
+        return resp
+    }
 }
