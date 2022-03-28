@@ -6,13 +6,13 @@
       <div class="site-brand-wrapper">
         <div class="site-meta">
           <div class="custom-logo-site-title">
-            <router-link :to="{name:'Home'}">
+            <router-link :to="{name:'Index'}">
               <a href="">
                 <span class="site-title">Dun Blogs</span>
               </a>
             </router-link>
           </div>
-          <p class="site-subtitle">老街橘杂</p>
+          <p class="site-subtitle">老橘牛杂</p>
         </div>
       </div>
       <el-menu
@@ -21,7 +21,7 @@
           @open="handleOpen"
           @close="handleClose"
       >
-        <router-link :to="{name:'Home'}">
+        <router-link :to="{name:'Index'}">
           <el-menu-item index="1">
             <el-icon><setting /></el-icon>
             <span>Home</span>

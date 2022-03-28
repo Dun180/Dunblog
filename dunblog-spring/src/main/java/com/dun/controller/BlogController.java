@@ -1,50 +1,73 @@
 package com.dun.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dun.common.lang.Result;
 import com.dun.entity.Blog;
 import com.dun.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/blog")
 public class BlogController {
 
     @Autowired
     BlogService blogService;
 
-    @PostMapping("/blogedit")
-    public Result blogEdit(@RequestBody Map<String,Object> map){
-        String title = map.get("title").toString();
-        String content = map.get("content").toString();
+    @PostMapping("/edit")
+    public Result blogEdit(@RequestBody Blog blog){
+        try{
 
-        Blog blog = new Blog();
-        blog.setTitle(title);
-        blog.setContent(content);
-        blog.setCreaterId(2);
+            blog.setCreaterId(2);
+            blog.setCategoryId(1);
 
-        if(map.get("blogId")!=null&&map.get("blogId").toString()!=""){
-            //如果博客存在 直接设置博客id，不需要自动递增
-            blog.setId(Integer.parseInt(map.get("blogId").toString()));
+            if(blogService.saveOrUpdate(blog)){
+                return Result.succ(true);
+            }else{
+                return Result.fail("提交失败");
+            }
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
         }
-        if(blogService.saveOrUpdate(blog)){
-            return Result.succ(true);
-        }else{
-            return Result.fail("提交失败");
-        }
+
     }
 
-    @GetMapping("/blog/{}")
-    public Result blog(){
+    @GetMapping("/list")
+    public Result blogList(@RequestParam(value = "currentPage") Long currentPage){
 
+        try{
+            if(currentPage == null || currentPage < 1) currentPage = (long)1;
+            Page<Map<String, Object>> page = new Page<>(currentPage,3);
+            List<Map<String, Object>> blogList = blogService.getBlogList(page);
+            for(Map<String, Object> map:blogList){
+                int count = map.get("content").toString().length();
+                map.put("count",count);
 
+                if (count > 100){
+                    map.put("content",map.get("content").toString().substring(0,100));
+                }
 
+            }
+            return Result.succ(blogList);
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
 
-        return Result.succ(true);
+    }
+
+    @GetMapping("/get")
+    public Result getBlogById(@RequestParam(value = "blogId") Long blogId){
+        try{
+            Blog blog = blogService.getById(blogId);
+            return Result.succ(blog);
+
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
     }
 }

@@ -6,19 +6,22 @@
         <div class="content">
           <section id="posts" class="post-expand">
             <article class="post">
-              <div class="post-block">
+              <div
+                  class="post-block"
+                  v-for="blog in blogList"
+              >
                 <header class="post-header">
                   <h1 class="post-title">
-                    <a class="post-title-link" href="">帖子标题</a>
+                    <a class="post-title-link" href="">{{blog.title}}</a>
                   </h1>
                   <div class="post-meta">
                     <span class="post-time">
                       <span class="post-meta-item-icon">
                         <i class="iconfont icon-calendar"></i>
                       </span>
-                      <span class="post-meta-item-text">Posted on</span>
+                      <span class="post-meta-item-text">Posted on </span>
                       <time title="Post created">
-                2021-12-14
+                {{ this.$moment(blog.createTime).format('YYYY-MM-DD') }}
               </time>
                     </span>
                     <span class="post-category">
@@ -29,7 +32,7 @@
                       <span class="post-meta-item-text">In </span>
                       <span>
                         <a href="">
-                          <span>offer</span>
+                          <span>{{blog.categoryName}}</span>
                         </a>
                       </span>
                     </span>
@@ -49,88 +52,23 @@
                   </div>
                 </header>
                 <div class="post-body">
-
-
-
-
-
-
-
-
-                  面试中的各项能力 Q.  两个链表第一个公共节点 A.  思路：通过倒序遍历两个链表，即使用两个stack来装载两个链表的节点，分别比较两个stack.top()，直到不相等时说明出现了分叉
-                  Q.  排序二叉树中两个节点的最低公共祖先 A.  思路：从根节点出发，如果root.value比两个节点
+                  {{blog.content}}
                   ...
-
                 </div>
                 <div class="post-button text-center">
-                  <a class="btn" href="">
-                    Read more »
-                  </a>
-                </div>
-              </div>
-              <div class="post-block">
-                <header class="post-header">
-                  <h1 class="post-title">
-                    <a class="post-title-link" href="">帖子标题</a>
-                  </h1>
-                  <div class="post-meta">
-                    <span class="post-time">
-                      <span class="post-meta-item-icon">
-                        <i class="iconfont icon-calendar"></i>
-                      </span>
-                      <span class="post-meta-item-text">Posted on</span>
-                      <time title="Post created">
-                2021-12-14
-              </time>
-                    </span>
-                    <span class="post-category">
-                      <span class="post-meta-divider">|</span>
-                      <span class="post-meta-item-icon">
-                        <i class="iconfont icon-folder"></i>
-                      </span>
-                      <span class="post-meta-item-text">In </span>
-                      <span>
-                        <a href="">
-                          <span>offer</span>
-                        </a>
-                      </span>
-                    </span>
-                    <div class="post-wordcount">
-                      <span class="post-meta-item-icon">
-                        <i class="iconfont icon-file"></i>
-                      </span>
-                      <span class="post-meta-item-text">Words count in article:</span>
-                      <span> 2.2k 字</span>
-                      <span class="post-meta-divider">|</span>
-                      <span class="post-meta-item-icon">
-                        <i class="iconfont icon-time"></i>
-                      </span>
-                      <span class="post-meta-item-text">Reading time ≈</span>
-                      <span> 9 min </span>
-                    </div>
-                  </div>
-                </header>
-                <div class="post-body">
-
-
-
-
-
-
-
-
-                  面试中的各项能力 Q.  两个链表第一个公共节点 A.  思路：通过倒序遍历两个链表，即使用两个stack来装载两个链表的节点，分别比较两个stack.top()，直到不相等时说明出现了分叉
-                  Q.  排序二叉树中两个节点的最低公共祖先 A.  思路：从根节点出发，如果root.value比两个节点
-                  ...
-
-                </div>
-                <div class="post-button text-center">
-                  <a class="btn" href="">
-                    Read more »
-                  </a>
+                  <router-link class="btn" :to="{name: 'BlogDetail',params: {blogId: blog.id}}">Read more »</router-link>
                 </div>
               </div>
             </article>
+            <div class="pagination-block">
+              <el-pagination
+                  :page-size="4"
+                  :total="5"
+                  v-model:current-page="this.currentPage"
+                  @current-change=page
+                  layout="prev, pager, next"
+              />
+            </div>
           </section>
         </div>
       </div>
@@ -151,7 +89,28 @@
 import Sidebar from "@/components/Sidebar";
 export default {
   name: "Index",
-  components: {Sidebar}
+  components: {Sidebar},
+  data() {
+    return {
+      blogList: {},
+      currentPage:1,
+      pageCount:5,
+      pageSize:4,
+
+    }
+  },
+  methods:{
+    //分页
+    async page(currentPage) {
+      const resp = await this.$api.getBlogList(currentPage)
+      console.log(resp)
+      this.blogList = resp
+
+    }
+  },
+  async created() {
+    this.page(1)
+  }
 }
 </script>
 
@@ -175,6 +134,7 @@ a:hover{
 }
 .main {
   background-color: #eee;
+
 }
 .el-container{
   width: 75%;
@@ -187,7 +147,6 @@ a:hover{
 .content-wrap{
   float: right;
   width: calc(100% - 252px);
-  height: 1660px;
   box-sizing: border-box;
 
 }

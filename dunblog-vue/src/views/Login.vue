@@ -75,6 +75,10 @@ export default {
 
         } else {
           console.log('error submit!!');
+          ElMessage({
+            message: '登录失败',
+            type: 'error',
+          })
           return false;
         }
       });

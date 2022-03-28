@@ -19,7 +19,6 @@ body {
 .content-wrap{
     float: right;
     width: calc(100% - 252px);
-    height: 1660px;
     box-sizing: border-box;
 
 }

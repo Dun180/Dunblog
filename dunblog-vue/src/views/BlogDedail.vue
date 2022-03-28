@@ -15,56 +15,40 @@
                       <span class="post-meta-item-icon">
                         <i class="iconfont icon-calendar"></i>
                       </span>
-                      <span class="post-meta-item-text">Posted on</span>
-                      <time title="Post created">
-                2021-12-14
-              </time>
-                    </span>
-                    <span class="post-category">
-                      <span class="post-meta-divider">|</span>
-                      <span class="post-meta-item-icon">
-                        <i class="iconfont icon-folder"></i>
+                      <span class="post-meta-item-text">Posted on </span>
+                        <time title="Post created">
+                          {{ this.$moment(blog.createTime).format('YYYY-MM-DD') }}
+                        </time>
                       </span>
-                      <span class="post-meta-item-text">In </span>
-                      <span>
-                        <a href="">
-                          <span>offer</span>
-                        </a>
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="iconfont icon-folder"></i>
+                        </span>
+                        <span class="post-meta-item-text">In </span>
+                        <span>
+                          <a href="">
+                            <span>{{ blog.categoryName }}</span>
+                          </a>
+                        </span>
                       </span>
-                    </span>
-                    <div class="post-wordcount">
-                      <span class="post-meta-item-icon">
-                        <i class="iconfont icon-file"></i>
-                      </span>
-                      <span class="post-meta-item-text">Words count in article:</span>
-                      <span> 2.2k 字</span>
-                      <span class="post-meta-divider">|</span>
-                      <span class="post-meta-item-icon">
-                        <i class="iconfont icon-time"></i>
-                      </span>
-                      <span class="post-meta-item-text">Reading time ≈</span>
-                      <span> 9 min </span>
-                    </div>
+                      <div class="post-wordcount">
+                        <span class="post-meta-item-icon">
+                          <i class="iconfont icon-file"></i>
+                        </span>
+                        <span class="post-meta-item-text">Words count in article:</span>
+                        <span> 2.2k 字</span>
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="iconfont icon-time"></i>
+                        </span>
+                        <span class="post-meta-item-text">Reading time ≈</span>
+                        <span> 9 min </span>
+                      </div>
                   </div>
                 </header>
                 <div class="post-body">
-
-
-
-
-
-
-
-
-                  面试中的各项能力 Q.  两个链表第一个公共节点 A.  思路：通过倒序遍历两个链表，即使用两个stack来装载两个链表的节点，分别比较两个stack.top()，直到不相等时说明出现了分叉
-                  Q.  排序二叉树中两个节点的最低公共祖先 A.  思路：从根节点出发，如果root.value比两个节点
-                  ...
-
-                </div>
-                <div class="post-button text-center">
-                  <a class="btn" href="">
-                    Read more »
-                  </a>
+                  <v-md-preview :text="blog.content"></v-md-preview>
                 </div>
               </div>
             </article>
@@ -77,7 +61,19 @@
 
 <script>
 export default {
-  name: "Blog"
+  name: "BlogDetail",
+  data(){
+    return{
+        blog:{}
+    }
+  },
+  async created() {
+    const blogId = this.$route.params.blogId
+    if(blogId){
+      const resp = await this.$api.getBlogById(blogId)
+      this.blog = resp
+    }
+  }
 }
 </script>
 
@@ -113,7 +109,6 @@ a:hover{
 .content-wrap{
   float: right;
   width: calc(100% - 252px);
-  height: 1660px;
   box-sizing: border-box;
 
 }
