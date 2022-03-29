@@ -16,28 +16,22 @@
         </div>
       </div>
       <el-menu
-          default-active="2"
+          default-active="1"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
       >
         <router-link :to="{name:'Index'}">
           <el-menu-item index="1">
-            <el-icon><setting /></el-icon>
             <span>Home</span>
           </el-menu-item>
         </router-link>
 
         <el-menu-item index="2">
-          <el-icon><setting /></el-icon>
           <span>Categories</span>
         </el-menu-item>
             <el-menu-item index="3">
-          <el-icon><setting /></el-icon>
           <span>Archives</span>
         </el-menu-item>
         <el-menu-item index="4">
-          <el-icon><setting /></el-icon>
           <span>Search</span>
         </el-menu-item>
       </el-menu>

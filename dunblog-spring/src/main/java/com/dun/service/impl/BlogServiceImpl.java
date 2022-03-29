@@ -19,7 +19,12 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
 
 
     @Override
-    public List<Map<String, Object>> getBlogList(IPage<Map<String, Object>> page) {
+    public IPage<Map<String, Object>> getBlogList(IPage<Map<String, Object>> page) {
         return blogMapper.getBlogList(page);
+    }
+
+    @Override
+    public Map<String, Object> getBlogDetailById(Integer id) {
+        return blogMapper.getBlogDetailById(id);
     }
 }

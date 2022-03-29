@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dun.mapper.BlogMapper">
+
     <select id="getBlogList" resultType="java.util.HashMap">
         SELECT
         blog.id AS id,
@@ -17,4 +18,24 @@
         ORDER BY
             createTime DESC
     </select>
+
+    <!--查询单个详细信息-->
+    <select id="getBlogDetailById" resultType="java.util.HashMap">
+        SELECT
+            blog.id AS id,
+            blog.title AS title,
+            blog.content AS content,
+            blog.create_time AS createTime,
+            category.`name` AS categoryName
+        FROM
+            blog
+                INNER JOIN
+            category
+            ON
+                blog.category_id = category.id
+        WHERE
+            blog.id = #{id}
+    </select>
 </mapper>
+
+

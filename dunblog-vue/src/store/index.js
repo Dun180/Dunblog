@@ -5,7 +5,6 @@ export default createStore({
     //私有属性
     token: localStorage.getItem("token"),
     userInfo: JSON.parse(sessionStorage.getItem("userInfo")),
-    key: Date.now()
   },
   mutations: {
     //  set
@@ -22,12 +21,7 @@ export default createStore({
       state.userInfo = {}
       localStorage.setItem("token", '')
       sessionStorage.setItem("userInfo", JSON.stringify(''))
-
-
     },
-    increment(state) {//刷新页面用
-      state.key=Date.now();
-    }
   },
   getters:{
     //  get

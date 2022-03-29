@@ -2,15 +2,12 @@
   <footer id="footer" class="footer">
     <div class="footer-inner">
 
-      <div class="copyright"> <span itemprop="copyrightYear">2021</span>
-        <span class="with-love">
-          <i class="fa fa-user"></i>
-        </span>
-        <span class="author" itemprop="copyrightHolder">Haonan Jia</span>
+      <div class="copyright"> <span itemprop="copyrightYear">2022 </span>
+
+        <span class="author" itemprop="copyrightHolder">Dun</span>
       </div>
-      <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-      <span class="post-meta-divider">|</span>
-      <div class="theme-info">Theme  <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+      <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://v3.cn.vuejs.org/">Vue</a></div>
+
     </div>
   </footer>
 </template>
@@ -23,13 +20,20 @@ export default {
 
 <style scoped>
 .footer {
-  bottom: auto;
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
   min-height: 50px;
+  width: 100%;
   font-size: 14px;
   color: #999;
+}
+.footer-inner{
+  width: 75%;
+  padding-left: 260px;
+  text-align: center;
+  box-sizing: border-box;
+  margin: 20px auto;
 }
 </style>

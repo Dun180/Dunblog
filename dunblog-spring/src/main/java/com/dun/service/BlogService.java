@@ -12,5 +12,11 @@ public interface BlogService extends IService<Blog> {
     /**
      * 获取blog信息列表
      */
-    List<Map<String,Object>> getBlogList(IPage<Map<String,Object>> page);
+    IPage<Map<String,Object>> getBlogList(IPage<Map<String,Object>> page);
+
+    /**
+     * 通过ID查询博客详细数据
+     *
+     */
+    Map<String,Object> getBlogDetailById(Integer id);
 }

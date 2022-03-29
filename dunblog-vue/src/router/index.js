@@ -18,12 +18,12 @@ const routes = [
     component: Login
   },
   {
-    path: '/blog',
+    path: '/blog/:blogId',
     name: 'BlogDetail',
     component: BlogDetail
   },
   {
-    path: '/blogedit',
+    path: '/blog/edit',
     name: 'BlogEdit',
     component: BlogEdit
   },

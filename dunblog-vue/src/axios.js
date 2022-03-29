@@ -19,10 +19,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
         // // 对响应数据做点什么
         let res = response.data;
-        //
-        // console.log("================")
-        // console.log(res)
-        // console.log("================")
+
 
         if(res.code === 200){
             return response
@@ -48,7 +45,7 @@ axios.interceptors.response.use(response => {
             //权限错误
             if (error.response.status === 401){
                 store.commit("REMOVE_INFO")
-                router.push("/login");
+                router.push("/");
             }
 
 

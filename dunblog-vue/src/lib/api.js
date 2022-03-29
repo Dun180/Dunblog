@@ -27,15 +27,27 @@ export class API {
     }
 
     //获取博客列表
-    async getBlogList(currentPage){
-        const resp = await axios.get(this.server_url+"/blog/list",{params:{currentPage:currentPage}})
+    async getBlogList(currentPage,pageSize){
+        const resp = await axios.get(this.server_url+"/blog/list",{params:{currentPage:currentPage,pageSize:pageSize}})
         return resp.data.data
     }
 
     //获取博客详细信息
-    async getBlogById(blogId){
+    async getBlogDetailById(blogId){
         const resp = await axios.get(this.server_url+"/blog/get",{params:{blogId:blogId}})
         return resp.data.data
 
+    }
+
+    //删除博客
+    async deleteBlog(data){
+        const resp = await axios.post(this.server_url+"/blog/delete",data)
+        return resp.data.data
+    }
+
+    //上传图片
+    async uploadImg(param,config){
+        const resp = await axios.post(this.server_url+"/upload",param,config)
+        return resp.data.data
     }
 }
