@@ -91,7 +91,7 @@ export default {
       //图片回显
       insertImage({
         url:
-            this.$api.server_url+'/viewphoto/'+resp,
+            this.$axios.defaults.baseURL+'/viewphoto/'+resp,
         desc: '图片',
         width: 'auto',
         height: 'auto',

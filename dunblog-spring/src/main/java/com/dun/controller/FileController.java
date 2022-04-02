@@ -13,6 +13,9 @@ import java.io.OutputStream;
 
 @RestController
 public class FileController {
+
+    private String imgPath = "D://Code//DunBlog//dunblog-spring//src//main//resources//static//uploadImg";
+//    private String imgPath = "/usr/file";
     /**
      * 文件上传
 
@@ -23,12 +26,19 @@ public class FileController {
         System.out.println(picture);
         System.out.println("您已进入图片上传服务");
         //获取文件在服务器的储存位置
-        String path = "D://Code//DunBlog//dunblog-spring//src//main//resources//static//uploadImg";
+        String path = imgPath;
         File filePath = new File(path);
         System.out.println("文件的保存路径：" + path);
+
         if (!filePath.exists() && !filePath.isDirectory()) {
             System.out.println("目录不存在，创建目录:" + filePath);
-            filePath.mkdir();
+            boolean mkdir = filePath.mkdir();
+            if(mkdir){
+                System.out.println("目录创建成功");
+
+            }else {
+                System.out.println("目录创建失败");
+            }
         }
 
         //获取原始文件名称(包含格式)
@@ -45,7 +55,7 @@ public class FileController {
         System.out.println("新文件名称：" + fileName);
 
         //在指定路径下创建一个文件
-        File targetFile = new File(path, fileName);
+        File targetFile = new File(new File(path).getAbsolutePath(), fileName);
         System.out.println("图片地址："+path+"/"+fileName);
         //将文件保存到服务器指定位置
         try {
@@ -68,7 +78,7 @@ public class FileController {
 
     @RequestMapping("/viewphoto/{photoPath}")
     public void getFeedBackPicture(HttpServletResponse response, @PathVariable("photoPath")String photoPath) throws Exception{
-        String realPath="D://Code//DunBlog//dunblog-spring//src//main//resources//static//uploadImg/"+photoPath;
+        String realPath=imgPath+"/"+photoPath;
         FileInputStream inputStream = new FileInputStream(realPath);
         int i = inputStream.available();
         //byte数组用于存放图片字节数据

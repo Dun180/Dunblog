@@ -5,6 +5,7 @@ import Login from "@/views/Login";
 import BlogDetail from "@/views/BlogDedail";
 import BlogEdit from "@/views/BlogEdit";
 import Backstage from "@/views/Backstage";
+import Error from "@/views/Error";
 
 const routes = [
   {
@@ -25,12 +26,23 @@ const routes = [
   {
     path: '/blog/edit',
     name: 'BlogEdit',
-    component: BlogEdit
+    component: BlogEdit,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/backstage',
     name: 'Backstage',
-    component: Backstage
+    component: Backstage,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/error',
+    name:'Error',
+    component: Error
   },
 ]
 

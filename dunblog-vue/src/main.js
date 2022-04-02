@@ -9,7 +9,7 @@ import 'element-plus/dist/index.css'
 
 import "./../public/js/canvas/canvas_lines.min.js"
 import "./axios"//请求拦截
-// import "./permission"//路由拦截
+import "./permission"//路由拦截
 import "./../public/css/reset.css"
 import "./../public/css/common.css"
 import "./../public/font/icon/iconfont.css"
@@ -34,6 +34,7 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-json';
 import moment from "moment";
 
+
 VMdPreview.use(githubTheme, {
     Hljs: hljs,
 });
@@ -47,12 +48,17 @@ app
     .use(VMdEditor)
     .use(VMdPreview)
     .mount('#app')
-//app.config.globalProperties.$api = new API("http://192.168.31.9:8081")
-app.config.globalProperties.$api = new API("http://localhost:8081")
+
+app.config.globalProperties.$api = new API()
+
 app.config.globalProperties.$axios = axios
 app.config.globalProperties.$moment = moment
 app.config.devtools = true
 
+app.provide('api', app.config.globalProperties.$api)
+
 VMdEditor.use(vuepressTheme, {
     Prism,
 });
+
+
