@@ -8,7 +8,6 @@ import VueAxios from 'vue-axios'
 
 import '@/assets/css/common.css'
 import '@/assets/css/reset.css'
-import '@/assets/js/canvas/canvas_lines.min'
 import '@/assets/font/icon/iconfont.css'
 
 
