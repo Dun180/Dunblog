@@ -89,6 +89,7 @@ export default {
     //分页
     async page(currentPage) {
       const resp = await this.$api.getBlogList(currentPage,this.pageSize)
+      console.log(resp)
       this.blogList = resp.records
       this.pageSize = resp.size
       this.pageTotal = resp.total

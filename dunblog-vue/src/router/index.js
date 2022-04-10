@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Index from "@/views/Index";
-import Login from "@/views/Login";
-import BlogDetail from "@/views/BlogDedail";
-import BlogEdit from "@/views/BlogEdit";
-import Backstage from "@/views/Backstage";
+import Index from "@/views/front/Index";
+import Login from "@/views/end/Login";
+import BlogDetail from "@/views/front/BlogDedail";
+import BlogEdit from "@/views/end/BlogEdit";
+import Backstage from "@/views/end/Backstage";
 import Error from "@/views/Error";
+import CategoryEdit from "@/views/end/CategoryEdit";
 
 const routes = [
   {
@@ -35,6 +36,14 @@ const routes = [
     path: '/backstage',
     name: 'Backstage',
     component: Backstage,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/category/edit',
+    name: 'CategoryEdit',
+    component: CategoryEdit,
     meta: {
       requireAuth: true
     }

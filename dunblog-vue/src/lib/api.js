@@ -50,4 +50,10 @@ export class API {
         const resp = await axios.post("/upload",param,config)
         return resp.data.data
     }
+
+    //分类列表
+    async getCategoryList(){
+        const resp = await axios.get("/category/list")
+        return resp.data.data
+    }
 }

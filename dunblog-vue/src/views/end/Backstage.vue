@@ -3,7 +3,9 @@
   <router-link class="btn" :to="{name:'BlogEdit'}">
     新建博客
   </router-link>
-
+  <router-link class="btn" :to="{name:'CategoryEdit'}">
+    分类编辑
+  </router-link>
   <el-table :data="blogList" style="width: 100%">
     <el-table-column label="Date" width="180">
       <template #default="scope">
@@ -70,8 +72,6 @@ export default {
   },
   methods:{
     async handleEdit(index, row){
-
-
 
     },
     async handleDelete(index, row){

@@ -9,6 +9,7 @@ import com.dun.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import java.util.Map;
 @RequestMapping("/blog")
 public class BlogController {
 
-    @Autowired
+    @Resource
     BlogService blogService;
 
     @PostMapping("/edit")
