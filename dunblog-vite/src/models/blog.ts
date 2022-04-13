@@ -9,5 +9,7 @@ export interface BlogProfile {
 }
 
 export interface BlogProfiles{
-    blogProfile:BlogProfile[];
+    records:BlogProfile[];
+    size:number;
+    total:number;
 }
