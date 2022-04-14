@@ -13,3 +13,4 @@ export interface BlogProfiles{
     size:number;
     total:number;
 }
+

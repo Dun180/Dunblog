@@ -27,7 +27,8 @@ import hljs from 'highlight.js';
 import Prism from 'prismjs';
 // highlight code
 import 'prismjs/components/prism-json';
-import moment from "moment";
+
+
 
 VMdPreview.use(githubTheme, {
     Hljs: hljs,
@@ -41,10 +42,6 @@ app
     .use(VMdEditor)
     .use(VMdPreview)
     .mount('#app')
-
-
-app.config.globalProperties.$axios = axios
-app.config.globalProperties.$moment = moment
 
 
 VMdEditor.use(vuepressTheme, {

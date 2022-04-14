@@ -7,9 +7,7 @@
       >
         <header class="post-header">
           <h1 class="post-title">
-            <h1 class="post-title">
               <router-link class="post-title-link" :to="{name: Pages.BlogDetail,params: {blogId: blog.id}}">{{blog.title}}</router-link>
-            </h1>
           </h1>
           <div class="post-meta">
                     <span class="post-time">
@@ -18,8 +16,8 @@
                       </span>
                       <span class="post-meta-item-text">Posted on </span>
                       <time title="Post created">
-
-              </time>
+                        {{ moment(blog.createTime).format('YYYY-MM-DD') }}
+                      </time>
                     </span>
             <span class="post-category">
                       <span class="post-meta-divider">|</span>
@@ -53,7 +51,8 @@
           ...
         </div>
         <div class="post-button text-center">
-          <span class="btn" >Read more »</span>
+          <router-link class="btn" :to="{name: Pages.BlogDetail,params: {blogId: blog.id}}">Read more »</router-link>
+
         </div>
       </div>
     </article>
@@ -75,7 +74,7 @@
 import {getBlogList} from "@/lib/api";
 import {BlogProfile} from "@/models/blog";
 import {Pages} from "@/router/pages";
-
+import moment from "moment";
 import {reactive, ref,Ref} from 'vue'
 import {onMounted} from "vue";
 
@@ -102,5 +101,17 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-
+body {
+  font-size: 16px;
+}
+::selection {
+  background-color: palevioletred;
+  color: white;
+}
+a {
+  color: #555;
+  text-decoration: none;
+  outline: none;
+  word-wrap: break-word;
+}
 </style>
