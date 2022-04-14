@@ -9,6 +9,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/front/BlogList.vue"),
 
     },
+    {
+        path: '/blog/:blogId',
+        name: Pages.BlogDetail,
+        component: () => import("@/views/front/BlogDetail.vue")
+    },
 ]
 
 const router = createRouter({

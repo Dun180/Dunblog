@@ -7,7 +7,9 @@
       >
         <header class="post-header">
           <h1 class="post-title">
-            <span class="post-title-link">{{blog.title}}</span>
+            <h1 class="post-title">
+              <router-link class="post-title-link" :to="{name: Pages.BlogDetail,params: {blogId: blog.id}}">{{blog.title}}</router-link>
+            </h1>
           </h1>
           <div class="post-meta">
                     <span class="post-time">
@@ -55,7 +57,15 @@
         </div>
       </div>
     </article>
-
+    <div class="pagination-block">
+      <el-pagination
+          v-model:page-size="this.pageSize"
+          :total="this.pageTotal"
+          v-model:current-page="this.currentPage"
+          @current-change="page"
+          layout="prev, pager, next"
+      />
+    </div>
   </section>
 
 
@@ -64,24 +74,26 @@
 <script setup lang="ts">
 import {getBlogList} from "@/lib/api";
 import {BlogProfile} from "@/models/blog";
+import {Pages} from "@/router/pages";
 
 import {reactive, ref,Ref} from 'vue'
 import {onMounted} from "vue";
-const haha:number = 1;
+
 let blogList = ref([] as BlogProfile[])
-let pageSize:number=4;
-let pageTotal:number;
-let currentPage:number=1;
+let pageSize=ref(4);
+let pageTotal=ref(1);
+let currentPage=ref(1);
 
 const page = async (currentPage: number): Promise<void> => {
-  const res = await getBlogList(currentPage, pageSize)
+  const res = await getBlogList(currentPage, pageSize.value)
   if (res.code == 200) {
     blogList.value = res.data.records
-    pageSize = res.data.size
-    pageTotal = res.data.total
-    console.log(blogList)
+    pageSize.value = res.data.size
+    pageTotal.value = res.data.total
+    console.log(res.data)
   }
 }
+
 onMounted(async () => {
   await page(1);
 })
