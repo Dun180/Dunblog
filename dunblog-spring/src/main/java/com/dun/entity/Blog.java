@@ -16,7 +16,7 @@ public class Blog {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private Integer createrId;
+    private Integer creatorId;
     private String title;
     private String content;
     private Integer categoryId;

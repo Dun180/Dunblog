@@ -4,10 +4,10 @@ import { defineStore } from 'pinia'
 // 第一个参数是应用程序中 store 的唯一 id
 export const useStore = defineStore('main', {
     state:() => {
-        return{
+        return {
             //私有属性
             token: localStorage.getItem("token"),
-            userInfo: JSON.parse(sessionStorage.getItem("userInfo") || ''),
+            userInfo: sessionStorage.getItem("userInfo") || '',
         }
     },
     getters:{
@@ -21,17 +21,17 @@ export const useStore = defineStore('main', {
     },
     actions:{
         //  set
-        SET_TOKEN: (state:any,token:any) => {
-            state.token = token
+        SET_TOKEN(token:any){
+            this.token = token
             localStorage.setItem("token", token)
         },
-        SET_USERINFO: (state:any,userInfo:any) => {
-            state.userInfo = userInfo
+        SET_USERINFO (userInfo:any) {
+            this.userInfo = userInfo
             sessionStorage.setItem("userInfo", JSON.stringify(userInfo))
         },
-        REMOVE_INFO: (state:any) => {
-            state.token = ''
-            state.userInfo = {}
+        REMOVE_INFO(){
+            this.token = ''
+            this.userInfo = ''
             localStorage.setItem("token", '')
             sessionStorage.setItem("userInfo", JSON.stringify(''))
         },

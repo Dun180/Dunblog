@@ -16,7 +16,7 @@ public class Category {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private Integer createrId;
+    private Integer creatorId;
     private String name;
 
     @TableField(fill = FieldFill.INSERT)

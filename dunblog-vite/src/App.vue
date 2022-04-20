@@ -1,10 +1,20 @@
 <script setup lang="ts">
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import { nextTick, provide, ref } from 'vue'
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 
+const isRouterAlive = ref(true);
+const reload = () => {
+  isRouterAlive.value = false
+  nextTick(function () {
+    isRouterAlive.value = true
+  })
+}
+provide("reload",reload)
 </script>
+
 
 <template>
   <div class="container">
@@ -14,7 +24,7 @@ import Footer from '@/components/Footer.vue'
       <div class="main-inner">
         <div class="content-wrap">
           <div class="content">
-            <RouterView/>
+            <RouterView v-if="isRouterAlive"/>
 
           </div>
         </div>

@@ -1,6 +1,25 @@
 import http from "@/utils/http";
+import axios from "axios";
 import {BlogProfile, BlogProfiles} from "@/models/blog";
-import {Result} from "@/models/result";
+import {Response, Result} from "@/models/result";
+import {CategoryInfo} from "@/models/category";
+
+
+//登录
+export async function login(form:any){
+    const resp = new Promise<Response>(async (resolve, reject) => {
+        await axios.post("/login", form)
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    })
+    return resp
+
+}
+
 
 //获取博客列表
 export async function getBlogList(currentPage:number,pageSize:number){
@@ -15,3 +34,44 @@ export async function getBlogDetailById(blogId:number){
 
 }
 
+//删除博客
+export async function deleteBlog(data:any){
+    const resp = await http.post<Result<Object>>("/blog/delete",data)
+    return resp
+}
+
+//上传图片
+export async function uploadImg(param:any,config:any){
+    const resp = await axios.post("/upload",param,config)
+    return resp.data.data
+}
+
+//博客编辑
+export async function blogEdit(form:any){
+    const resp = await http.post<Result<Object>>("/blog/edit",form)
+    return resp
+}
+
+//分类列表
+export async function getCategoryList(){
+    const resp = await http.get<Result<CategoryInfo[]>>("/category/list")
+    return resp
+}
+
+//分类编辑
+export async function categoryEdit(data:any){
+    const resp = await http.post<Result<Object>>("/category/edit",data)
+    return resp
+}
+
+//删除分类
+export async function deleteCategory(data:any){
+    const resp = await http.post<Result<Object>>("/category/delete",data)
+    return resp
+}
+
+//添加分类
+export async function addCategory(data:any){
+    const resp = await http.post<Result<Object>>("/category/add",data)
+    return resp
+}

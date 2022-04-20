@@ -14,6 +14,26 @@ const routes: Array<RouteRecordRaw> = [
         name: Pages.BlogDetail,
         component: () => import("@/views/front/BlogDetail.vue")
     },
+    {
+        path: '/login',
+        name: Pages.Login,
+        component: () => import("@/views/end/Login.vue")
+    },
+    {
+        path: '/backstage',
+        name: Pages.Backstage,
+        component: () => import("@/views/end/Backstage.vue")
+    },
+    {
+        path: '/blog/edit',
+        name: Pages.BlogEdit,
+        component: () => import("@/views/end/BlogEdit.vue")
+    },
+    {
+        path: '/category/edit',
+        name: Pages.CategoryEdit,
+        component: () => import("@/views/end/CategoryEdit.vue")
+    },
 ]
 
 const router = createRouter({

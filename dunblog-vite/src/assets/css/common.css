@@ -62,6 +62,7 @@ div {
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
     line-height: 2;
+    cursor: pointer
 }
 .btn:hover{
     color: #fff;

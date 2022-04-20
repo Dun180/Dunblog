@@ -24,7 +24,7 @@ public class BlogController {
     public Result blogEdit(@RequestBody Blog blog){
         try{
 
-            blog.setCreaterId(2);
+            blog.setCreatorId(2);
             blog.setCategoryId(1);
 
             if(blogService.saveOrUpdate(blog)){

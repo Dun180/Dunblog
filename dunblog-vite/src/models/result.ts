@@ -4,3 +4,8 @@ export interface Result<T>{
     code:number;
     data:T;
 }
+export interface Response{
+    data:any;
+    headers:any;
+}
+

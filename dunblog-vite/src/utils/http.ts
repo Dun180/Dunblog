@@ -1,8 +1,8 @@
 import axios, {type AxiosRequestConfig} from "axios";
 
 // axios.defaults.baseURL = localStorage.getItem('BASE_URL')?.toString();
-// axios.defaults.baseURL ='http://localhost:8081'
-axios.defaults.baseURL='http://152.136.209.249:8081'
+axios.defaults.baseURL ='http://localhost:8081'
+// axios.defaults.baseURL='http://152.136.209.249:8081'
 
 axios.defaults.timeout = 20 * 1000;
 axios.defaults.maxBodyLength = 5 * 1024 * 1024;
@@ -70,7 +70,7 @@ const http: Http = {
     post(url, params) {
         return new Promise((resolve, reject) => {
             axios
-                .post(url, JSON.stringify(params))
+                .post(url, params)
                 .then((res) => {
                     resolve(res.data);
                 })
