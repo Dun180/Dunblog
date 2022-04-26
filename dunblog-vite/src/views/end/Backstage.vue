@@ -95,7 +95,6 @@
       // this.blogList = Object.values(resp.records)
       pageSize.value = res.data.size
       pageTotal.value = res.data.total
-      console.log(res.data)
     }
   }
   onMounted(async () => {
@@ -105,5 +104,8 @@
 </script>
 
 <style scoped>
-
+.pagination-block{
+  display: flex;
+  justify-content: center;
+}
 </style>

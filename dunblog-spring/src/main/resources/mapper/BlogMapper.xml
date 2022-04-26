@@ -26,6 +26,7 @@
             blog.title AS title,
             blog.content AS content,
             blog.create_time AS createTime,
+            blog.category_id AS categoryId,
             category.`name` AS categoryName
         FROM
             blog

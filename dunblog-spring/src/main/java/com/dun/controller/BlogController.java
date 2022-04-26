@@ -25,7 +25,7 @@ public class BlogController {
         try{
 
             blog.setCreatorId(2);
-            blog.setCategoryId(1);
+//            blog.setCategoryId(1);
 
             if(blogService.saveOrUpdate(blog)){
                 return Result.succ(true);

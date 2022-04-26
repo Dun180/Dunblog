@@ -31,16 +31,17 @@
 
       </template>
       <template #default="scope">
-        <el-popover placement="bottom" :width="400" trigger="click" v-model:visible="editVisible">
+
+        <el-popover placement="bottom" :width="400" trigger="click" :visible="editVisibleIndex === scope.$index">
           <template #reference>
-            <el-button size="small" @click="editVisible = true">
+            <el-button size="small" @click="editVisibleIndex = scope.$index">
               Edit
             </el-button>
           </template>
           <el-input v-model="input" placeholder="Please input" />
 
           <div style="text-align: right; margin: 10px 0 0;">
-            <el-button size="small" type="text" @click="editVisible = false"
+            <el-button size="small" type="text" @click="editVisibleIndex = -1"
             >cancel</el-button
             >
             <el-button size="small" type="primary" @click="handleEdit(scope.$index, scope.row)"
@@ -48,9 +49,6 @@
             >
           </div>
         </el-popover>
-
-
-
         <el-popconfirm
             title="Are you sure to delete this?"
             icon-color="red"
@@ -77,14 +75,14 @@
 import {ElMessage} from "element-plus";
 import {inject, onMounted, ref} from "vue";
 import {CategoryInfo} from "@/models/category";
-import {deleteCategory, getCategoryList, addCategory} from "@/lib/api";
+import {deleteCategory, getCategoryList, addCategory, categoryEdit} from "@/lib/api";
 import moment from "moment";
 
 
 const reload = inject("reload", Function)
 let categoryList = ref([] as CategoryInfo[])
 let addVisible = ref(false)
-let editVisible = ref(false)
+let editVisibleIndex = ref(-1)
 let input = ref('')
 
 const handleAdd = async () => {
@@ -125,12 +123,24 @@ const handleEdit = async (index:any, row:any) => {
     })
     return
   }
-  editVisible.value = false
-  console.log(input)
+  editVisibleIndex.value = -1
   const data = {
-
+    id:row.id,
+    name:input.value
   }
-
+  const resp = await categoryEdit(data);
+  if (resp.code == 200) {
+    reload()
+    ElMessage({
+      message: '编辑成功',
+      type: 'success',
+    })
+  }else {
+    ElMessage({
+      message: '编辑失败',
+      type: 'error',
+    })
+  }
   input.value = ''
 }
 

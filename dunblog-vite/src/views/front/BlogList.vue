@@ -114,5 +114,8 @@ a {
   outline: none;
   word-wrap: break-word;
 }
-
+.pagination-block{
+  display: flex;
+  justify-content: center;
+}
 </style>

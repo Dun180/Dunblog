@@ -8,7 +8,16 @@
     <el-form-item label="标题" style="margin-top: 20px">
       <el-input v-model="blogForm.title"></el-input>
     </el-form-item>
-
+    <el-form-item label="分类">
+      <el-select v-model="blogForm.categoryId" class="m-2" placeholder="Select" size="large">
+        <el-option
+            v-for="(item,index) in categoryList"
+            :key="index"
+            :label="item.name"
+            :value="item.id"
+        />
+      </el-select>
+    </el-form-item>
     <el-form-item>
       <v-md-editor
           v-model="blogForm.content"
@@ -30,17 +39,19 @@
 
 import {useRoute, useRouter} from "vue-router";
 import {onMounted, reactive, ref} from "vue";
-import {getBlogDetailById, uploadImg,blogEdit} from "@/lib/api";
+import {getBlogDetailById, uploadImg, blogEdit, getCategoryList} from "@/lib/api";
 import {ElMessage,FormInstance} from "element-plus";
 import axios from "axios";
+import {CategoryInfo} from "@/models/category";
 
 const blogFormRef = ref<FormInstance>()
-
+let categoryList = ref([] as CategoryInfo[])
 
 const blogForm = reactive({
   id:'',
   title: '',
-  content: 'text content'
+  content: 'text content',
+  categoryId: 1,
 })
 
 const rules = reactive(
@@ -61,11 +72,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate(async (valid) => {
     if (valid) {
-      console.log("submit")
       //axios异步向后端请求数据验证
       const resp = await blogEdit(blogForm);
       if (resp.code == 200) {
-        console.log('提交成功')
         ElMessage({
           message: '提交成功',
           type: 'success',
@@ -84,12 +93,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 
 const handleUploadImage = async (event:any, insertImage:any, files:any) => {
   //拿到 files 之后上传到文件服务器，然后向编辑框中插入对应的内容
-  console.log(files);
   let file = files[0]
   let param = new FormData()  // 创建form对象
   param.append('file', file)  // 通过append向form对象添加数据
   param.append('chunk', '0') // 添加form表单中其他数据
-  console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
   let config = {
     headers: {'Content-Type': 'multipart/form-data'}
   }
@@ -113,8 +120,12 @@ onMounted(async () => {
     if (res.code == 200) {
       blogForm.title = res.data.title
       blogForm.content = res.data.content
-
+      blogForm.categoryId = res.data.categoryId
     }
+  }
+  const resp = await getCategoryList();
+  if (resp.code == 200) {
+    categoryList.value = Object.values(resp.data)
   }
 })
 

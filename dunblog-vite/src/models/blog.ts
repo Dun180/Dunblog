@@ -1,16 +1,17 @@
 export interface BlogProfile {
     id: number;
-    title:string;
-    count:string;
-    content:string;
-    categoryName:string;
-    readTime:number;
-    createTime:string;
+    title: string;
+    count: string;
+    content: string;
+    categoryName: string;
+    categoryId: number;
+    readTime: number;
+    createTime: string;
 }
 
 export interface BlogProfiles{
-    records:BlogProfile[];
-    size:number;
-    total:number;
+    records: BlogProfile[];
+    size: number;
+    total: number;
 }
 
