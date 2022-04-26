@@ -24,13 +24,16 @@
             <span>Home</span>
           </el-menu-item>
         </router-link>
-
-        <el-menu-item index="2">
-          <span>Categories</span>
-        </el-menu-item>
-        <el-menu-item index="3">
-          <span>Archives</span>
-        </el-menu-item>
+        <router-link :to="{name:'CategoryList'}">
+          <el-menu-item index="2">
+            <span>Categories</span>
+          </el-menu-item>
+        </router-link>
+        <router-link :to="{name:'Archives'}">
+          <el-menu-item index="3">
+            <span>Archives</span>
+          </el-menu-item>
+        </router-link>
         <el-menu-item index="4">
           <span>Search</span>
         </el-menu-item>

@@ -5,4 +5,8 @@ export const Pages = {
     Backstage:'Backstage',
     BlogEdit:'BlogEdit',
     CategoryEdit:'CategoryEdit',
+    CategoryList:'CategoryList',
+    CategoryDetail:'CategoryDetail',
+    Archives:'Archives',
+
 }

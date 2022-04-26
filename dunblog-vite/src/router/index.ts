@@ -34,6 +34,21 @@ const routes: Array<RouteRecordRaw> = [
         name: Pages.CategoryEdit,
         component: () => import("@/views/end/CategoryEdit.vue")
     },
+    {
+        path: '/categories',
+        name: Pages.CategoryList,
+        component: () => import("@/views/front/CategoryList.vue")
+    },
+    {
+        path: '/category/:categoryId',
+        name: Pages.CategoryDetail,
+        component: () => import("@/views/front/CategoryDetail.vue")
+    },
+    {
+        path: '/archives',
+        name: Pages.Archives,
+        component: () => import("@/views/front/Archives.vue")
+    },
 ]
 
 const router = createRouter({
