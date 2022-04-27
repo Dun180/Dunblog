@@ -34,9 +34,6 @@
             <span>Archives</span>
           </el-menu-item>
         </router-link>
-        <el-menu-item index="4">
-          <span>Search</span>
-        </el-menu-item>
       </el-menu>
     </div>
 

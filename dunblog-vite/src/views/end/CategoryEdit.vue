@@ -94,7 +94,6 @@ const handleAdd = async () => {
     return
   }
   addVisible.value = false
-  console.log(input)
   const data = {
     name: input.value
   }

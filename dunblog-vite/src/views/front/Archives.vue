@@ -55,7 +55,6 @@ const page = async (currentPage: number): Promise<void> => {
     blogList.value = res.data.records
     pageSize.value = res.data.size
     pageTotal.value = res.data.total
-    console.log(res.data)
   }
 }
 

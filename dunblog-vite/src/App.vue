@@ -2,8 +2,20 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import { nextTick, provide, ref } from 'vue'
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+
+setTimeout(() => {
+  window.L2Dwidget.init({
+    pluginRootPath: 'live2dw/',
+    pluginJsPath: 'lib/',
+    pluginModelPath: 'live2d-widget-model-wanko/assets/',
+    tagMode: false,
+    debug: false,
+    model: { jsonPath: '/live2dw/live2d-widget-model-wanko/assets/wanko.model.json' },
+    display: { position: 'right', width: 150, height: 300 },
+    mobile: { show: true },
+    log: false
+  })
+}, 3000)
 
 const isRouterAlive = ref(true);
 const reload = () => {
@@ -28,6 +40,9 @@ provide("reload",reload)
 
           </div>
         </div>
+        <aside class="sidebar">
+          <Sidebar></Sidebar>
+        </aside>
       </div>
     </div>
     <Footer></Footer>
@@ -60,4 +75,10 @@ body{
   color: #42b983;
 }
 
+.sidebar{
+  position: static;
+  float: left;
+  width: 239px;
+  margin-top: 285px;
+}
 </style>

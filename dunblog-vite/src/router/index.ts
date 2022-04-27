@@ -42,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/category/:categoryId',
         name: Pages.CategoryDetail,
-        component: () => import("@/views/front/CategoryDetail.vue")
+        component: () => import("@/views/front/CategoryDetail.vue"),
     },
     {
         path: '/archives',

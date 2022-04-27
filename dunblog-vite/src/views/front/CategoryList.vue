@@ -5,15 +5,21 @@
         <header class="post-header">
           <h1 class="post-title">
             <span class="post-title-link">Categories</span>
-            <span class="category-all">13 categories in total</span>
+            <span class="category-all">{{ categoryList.length }} categories in total</span>
           </h1>
 
         </header>
         <div class="post-body">
-          <div class="category-list" v-for="(item,index) in categoryList" :key="index">
-            <router-link class="category-item" :to="{name: Pages.CategoryDetail,params: {categoryId: item.id}}">{{item.name}}</router-link>
 
-          </div>
+            <ul class="category-list">
+              <li v-for="(item,index) in categoryList" :key="index">
+                <router-link class="category-item" :to="{name: Pages.CategoryDetail,params: {categoryId: item.id}}">{{item.name}}</router-link>
+
+              </li>
+
+            </ul>
+
+
 
         </div>
       </div>
@@ -34,7 +40,6 @@ onMounted(async () => {
   const resp = await getCategoryList();
   if (resp.code == 200) {
     categoryList.value = Object.values(resp.data)
-    console.log(categoryList.value)
   }
 })
 
@@ -50,7 +55,14 @@ onMounted(async () => {
   line-height: 2;
   color: #555;
 }
+.category-list{
+  margin-top: 20px;
+}
 .category-item{
   text-decoration:underline;
+}
+li::marker {
+  content: 'o  ';
+
 }
 </style>

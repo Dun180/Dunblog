@@ -25,11 +25,8 @@
                         <i class="iconfont icon-folder"></i>
                       </span>
                       <span class="post-meta-item-text">In </span>
-                      <span>
-                        <a href="">
-                          <span id="category" >{{blog.categoryName}}</span>
-                        </a>
-                      </span>
+                      <router-link class="category-router" :to="{name: Pages.CategoryDetail,params: {categoryId: blog.categoryId}}">{{blog.categoryName}}</router-link>
+
                     </span>
             <div class="post-wordcount">
                       <span class="post-meta-item-icon">
@@ -62,6 +59,7 @@
           :total="this.pageTotal"
           v-model:current-page="this.currentPage"
           @current-change="page"
+          :hide-on-single-page="true"
           layout="prev, pager, next"
       />
     </div>
@@ -89,8 +87,8 @@ const page = async (currentPage: number): Promise<void> => {
     blogList.value = res.data.records
     pageSize.value = res.data.size
     pageTotal.value = res.data.total
-    console.log(res.data)
   }
+  document.documentElement.scrollTop = 0;
 }
 
 onMounted(async () => {
@@ -108,11 +106,14 @@ body {
   background-color: palevioletred;
   color: white;
 }
-a {
+.category-router {
   color: #555;
-  text-decoration: none;
+  text-decoration: underline;
   outline: none;
   word-wrap: break-word;
+}
+.category-router:hover{
+  color: #000000;
 }
 .pagination-block{
   display: flex;

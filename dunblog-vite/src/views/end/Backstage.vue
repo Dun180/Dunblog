@@ -46,6 +46,7 @@
         :total="this.pageTotal"
         v-model:current-page="this.currentPage"
         @current-change=page
+        :hide-on-single-page="true"
         layout="prev, pager, next"
     />
   </div>

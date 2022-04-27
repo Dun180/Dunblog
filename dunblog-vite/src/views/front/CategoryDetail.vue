@@ -24,6 +24,7 @@
                 :total="this.pageTotal"
                 v-model:current-page="this.currentPage"
                 @current-change="page"
+                :hide-on-single-page="true"
                 layout="prev, pager, next"
             />
           </div>
@@ -34,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import {getBlogDetailById, getBlogList, getBlogListByCategoryId, getCategoryInfoById} from "@/lib/api";
+import {getBlogListByCategoryId, getCategoryInfoById} from "@/lib/api";
 import {BlogProfile} from "@/models/blog";
 import {Pages} from "@/router/pages";
 import moment from "moment";
-import {reactive, ref,Ref} from 'vue'
+import {ref} from 'vue'
 import {onMounted} from "vue";
 import {useRoute} from "vue-router";
 
@@ -59,7 +60,6 @@ const page = async (currentPage: number): Promise<void> => {
     blogList.value = res.data.records
     pageSize.value = res.data.size
     pageTotal.value = res.data.total
-    console.log(res.data)
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-header><img class="mlogo" src="girl.png" alt=""></el-header>
+      <el-header><img class="mlogo" :src="girlURL" alt=""></el-header>
       <el-main>
         <el-form
             :model="ruleForm"
@@ -35,6 +35,7 @@ import type { FormInstance } from 'element-plus'
 import { useStore } from '@/store/index'
 import { useRouter } from 'vue-router'
 import {login} from "@/lib/api";
+import girlURL from '@/assets/img/girl.png'
 
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive({
@@ -59,9 +60,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   await formEl.validate(async (valid) => {
     if (valid) {
       //axios异步向后端请求数据验证
-      console.log("logining....")
       const res = await login(ruleForm);
-      console.log(res)
       //从后端传回来的数据中拿到jwt和用户的数据
       const jwt = res.headers['authorization']
       const userInfo = res.data.data
@@ -87,7 +86,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       }
 
     } else {
-      console.log('error submit!!');
       ElMessage({
         message: '登录失败',
         type: 'error',

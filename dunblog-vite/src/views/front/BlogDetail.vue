@@ -22,11 +22,10 @@
                           <i class="iconfont icon-folder"></i>
                         </span>
                         <span class="post-meta-item-text">In </span>
-                        <span>
-                          <a href="">
-                            <span id="category" >{{ blog.categoryName }}</span>
-                          </a>
-                        </span>
+                        <router-link class="category-router"
+                                     v-if="typeof blog.categoryId !== 'undefined'"
+                                     :to="{name: Pages.CategoryDetail,params:{categoryId: blog.categoryId}}">{{blog.categoryName}}</router-link>
+
                       </span>
             <div class="post-wordcount">
                         <span class="post-meta-item-icon">
@@ -58,19 +57,18 @@ import {onMounted, ref} from "vue";
 import {getBlogDetailById} from "@/lib/api";
 import {BlogProfile} from "@/models/blog";
 import moment from "moment";
+import {Pages} from "@/router/pages";
 
 
 const route = useRoute()
 
 const blogId = ref(route.params.blogId)
 const blog = ref({} as BlogProfile)
-
 onMounted(async () => {
   if(blogId.value){
     const res = await getBlogDetailById(Number(blogId.value))
     if (res.code == 200) {
       blog.value = res.data
-      console.log(blog.value)
     }
   }
 })
@@ -87,13 +85,16 @@ body {
   background-color: palevioletred;
   color: white;
 }
-a {
+.post-block{
+  min-height: 660px;
+}
+.category-router {
   color: #555;
-  text-decoration: none;
+  text-decoration: underline;
   outline: none;
   word-wrap: break-word;
 }
-.post-block{
-  min-height: 660px;
+.category-router:hover{
+  color: #000000;
 }
 </style>

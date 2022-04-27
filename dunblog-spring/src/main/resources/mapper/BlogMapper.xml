@@ -9,7 +9,8 @@
         blog.title AS title,
         blog.content AS content,
         blog.create_time AS createTime,
-        category.`name` AS categoryName
+        category.`name` AS categoryName,
+        category.id AS categoryId
         FROM
         blog
         INNER JOIN
@@ -47,7 +48,8 @@
             blog.content AS content,
             blog.create_time AS createTime,
             blog.category_id AS categoryId,
-            category.`name` AS categoryName
+            category.`name` AS categoryName,
+            category.id AS categoryId
         FROM
             blog
                 INNER JOIN
