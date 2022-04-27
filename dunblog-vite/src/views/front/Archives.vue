@@ -10,12 +10,15 @@
         </header>
         <div class="post-body">
           <el-timeline>
+
             <el-timeline-item
                 v-for="(item, index) in blogList"
                 :key="index"
                 :timestamp="moment(item.createTime).format('YYYY-MM-DD')"
             >
-              {{ item.title }}
+              <router-link :to="{name: Pages.BlogDetail,params: {blogId: item.id}}">{{ item.title }}</router-link>
+
+
             </el-timeline-item>
           </el-timeline>
           <div class="pagination-block">

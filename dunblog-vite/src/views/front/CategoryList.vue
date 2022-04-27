@@ -11,7 +11,8 @@
         </header>
         <div class="post-body">
           <div class="category-list" v-for="(item,index) in categoryList" :key="index">
-            <div class="category-item">{{item.name}}</div>
+            <router-link class="category-item" :to="{name: Pages.CategoryDetail,params: {categoryId: item.id}}">{{item.name}}</router-link>
+
           </div>
 
         </div>
@@ -25,6 +26,7 @@
 import { onMounted, ref} from "vue";
 import {CategoryInfo} from "@/models/category";
 import { getCategoryList} from "@/lib/api";
+import {Pages} from "@/router/pages";
 
 let categoryList = ref([] as CategoryInfo[])
 

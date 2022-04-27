@@ -1,12 +1,17 @@
 package com.dun.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dun.common.lang.Result;
 import com.dun.entity.Category;
+import com.dun.mapper.BlogMapper;
+import com.dun.service.BlogService;
 import com.dun.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/category")
@@ -15,6 +20,9 @@ public class CategoryController {
 
     @Resource
     CategoryService categoryService;
+
+    @Resource
+    BlogService blogService;
 
     @PostMapping("/add")
     public Result addCategory(@RequestBody Category category){
@@ -67,5 +75,33 @@ public class CategoryController {
         }catch (Exception e){
             return Result.fail(e.getMessage());
         }
+    }
+
+    @GetMapping("/get")
+    public Result getCategoryInfoById(@RequestParam(value = "categoryId") Integer categoryId){
+        try{
+            Category category = categoryService.getById(categoryId);
+
+            return Result.succ(category);
+
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+    }
+
+    //根据分类id获取博客列表
+    @GetMapping("/{categoryId}/blogs")
+    public Result getBlogListByCategoryId(@PathVariable("categoryId") Integer categoryId,@RequestParam(value = "currentPage") Long currentPage,@RequestParam(value = "pageSize") Long pageSize){
+
+        try{
+            if(currentPage == null || currentPage < 1) currentPage = (long)1;
+            Page<Map<String, Object>> page = new Page<>(currentPage,pageSize);
+            IPage<Map<String, Object>> iPage = blogService.getBlogListByCategoryId(categoryId,page);
+
+            return Result.succ(iPage);
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+
     }
 }

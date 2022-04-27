@@ -58,6 +58,11 @@ export async function getCategoryList(){
     return resp
 }
 
+export async function getCategoryInfoById(id:number){
+    const resp = await http.get<Result<CategoryInfo>>("/category/get",{categoryId:id})
+    return resp
+}
+
 //分类编辑
 export async function categoryEdit(data:any){
     const resp = await http.post<Result<Object>>("/category/edit",data)
@@ -75,3 +80,14 @@ export async function addCategory(data:any){
     const resp = await http.post<Result<Object>>("/category/add",data)
     return resp
 }
+
+
+//根据分类id获取博客列表
+export async function getBlogListByCategoryId(categoryId:number, currentPage:number, pageSize:number) {
+    const resp = await http.get<Result<BlogProfiles>>('/category/'+categoryId+'/blogs', {
+        currentPage: currentPage,
+        pageSize: pageSize
+    })
+    return resp
+}
+
