@@ -8,5 +8,8 @@ export const Pages = {
     CategoryList:'CategoryList',
     CategoryDetail:'CategoryDetail',
     Archives:'Archives',
+    Admin:'Admin',
+    Dashboard:'Dashboard',
+    Front:'Front'
 
 }

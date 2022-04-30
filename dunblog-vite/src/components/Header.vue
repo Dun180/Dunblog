@@ -1,5 +1,5 @@
 <template>
-  <el-header height="3px" style="background-color: black">
+  <el-header height="3px" class="black-bar">
   </el-header>
   <div class="header">
     <div class="header-inner">
@@ -36,9 +36,8 @@
         </router-link>
       </el-menu>
     </div>
-    <div class="header-inner2">
+    <div class="return-external">
       <a href="#" class="return-top" title="点击返回顶部"></a>
-
     </div>
 
   </div>
@@ -64,17 +63,16 @@ const {proxy} = getCurrentInstance()
 
 const handleScroll = () => {
   let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop; //滚动高度
-  let boxHeight = 0;
-  // console.log(proxy.$refs.pos)
-  // boxHeight = proxy.$refs.memberHeader.clientHeight + proxy.$refs.memberContent.clientHeight; //盒子高度
+  let element = document.querySelector(".return-top");
 
-  // if (boxHeight - scrollHeight <= 68) {
-  //   console.log(111)
-  // } else {
-  //   console.log(222)
-  //
-  // }
+  if (scrollHeight>400){
+    element.style.transform = "translateY(0px)"
+  }else {
+    element.style.transform = "translateY(-100%)"
+
+  }
 }
+
 
 </script>
 
@@ -88,9 +86,16 @@ const handleScroll = () => {
   color: var(--el-text-color-primary);
 }
 .header{
+
   position: relative;
   margin: 0 auto;
   width: 75%;
+}
+.black-bar{
+  position: fixed;
+  background-color: black;
+  width: 100%;
+  z-index: 1000;
 }
 .header .header-inner{
   position: absolute;
@@ -99,7 +104,7 @@ const handleScroll = () => {
   border-radius: initial;
   margin: 0 auto;
 }
-.header .header-inner2{
+.header .return-external{
   float: right;
   right: 180px;
   position: fixed;
@@ -110,10 +115,13 @@ const handleScroll = () => {
 .return-top{
   display: block;
   width: 70px;
-  height: 900px;
-  background: url("src/assets/img/hanging_rope.png");
+  height: 90vh;
+  background: url("@/assets/img/hanging_rope.png");
   transition: all .6s;
   cursor: pointer;
+  background-size: 100% 100%;
+  transform: translateY(-100%);
+
 }
 
 .site-meta {
@@ -126,12 +134,16 @@ const handleScroll = () => {
   line-height: 36px;
   font-size: 20px;
   font-weight: normal;
+  display: flex;
+  justify-content: center;
 }
 .site-subtitle{
   font-size: 13px;
   margin: 10px 10px 0;
   font-weight: initial;
   color: #ddd;
+  display: flex;
+  justify-content: center;
 }
 div {
   display: block;
