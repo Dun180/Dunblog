@@ -42,9 +42,9 @@
 
   <div class="pagination-block">
     <el-pagination
-        :page-size="this.pageSize"
-        :total="this.pageTotal"
-        v-model:current-page="this.currentPage"
+        :page-size="pageSize"
+        :total="pageTotal"
+        v-model:current-page="currentPage"
         @current-change=page
         :hide-on-single-page="true"
         layout="prev, pager, next"

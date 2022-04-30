@@ -30,17 +30,51 @@
           </el-menu-item>
         </router-link>
         <router-link :to="{name:'Archives'}">
-          <el-menu-item index="3">
+          <el-menu-item index="3" ref="pos">
             <span>Archives</span>
           </el-menu-item>
         </router-link>
       </el-menu>
+    </div>
+    <div class="header-inner2">
+      <a href="#" class="return-top" title="点击返回顶部"></a>
+
     </div>
 
   </div>
 </template>
 
 <script setup lang="ts">
+import {getCurrentInstance, onMounted, onUnmounted} from "vue";
+
+
+onMounted(async () => {
+  console.log(proxy)
+  window.addEventListener("scroll", handleScroll); // 监听（绑定）滚轮滚动事件
+
+})
+onUnmounted(async ()=>{
+  window.removeEventListener("scroll", handleScroll);
+
+})
+
+
+const {proxy} = getCurrentInstance()
+
+
+const handleScroll = () => {
+  let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop; //滚动高度
+  let boxHeight = 0;
+  // console.log(proxy.$refs.pos)
+  // boxHeight = proxy.$refs.memberHeader.clientHeight + proxy.$refs.memberContent.clientHeight; //盒子高度
+
+  // if (boxHeight - scrollHeight <= 68) {
+  //   console.log(111)
+  // } else {
+  //   console.log(222)
+  //
+  // }
+}
 
 </script>
 
@@ -65,6 +99,23 @@
   border-radius: initial;
   margin: 0 auto;
 }
+.header .header-inner2{
+  float: right;
+  right: 180px;
+  position: fixed;
+  height: 0px;
+  /*transform: translateY(100vh);*/
+  transform: translateX(100px);
+}
+.return-top{
+  display: block;
+  width: 70px;
+  height: 900px;
+  background: url("src/assets/img/hanging_rope.png");
+  transition: all .6s;
+  cursor: pointer;
+}
+
 .site-meta {
   padding: 20px 0;
   font-size: 16px;

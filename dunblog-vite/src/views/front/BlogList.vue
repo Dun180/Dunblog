@@ -55,9 +55,9 @@
     </article>
     <div class="pagination-block">
       <el-pagination
-          v-model:page-size="this.pageSize"
-          :total="this.pageTotal"
-          v-model:current-page="this.currentPage"
+          v-model:page-size="pageSize"
+          v-model:total="pageTotal"
+          v-model:current-page="currentPage"
           @current-change="page"
           :hide-on-single-page="true"
           layout="prev, pager, next"

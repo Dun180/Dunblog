@@ -23,9 +23,9 @@
           </el-timeline>
           <div class="pagination-block">
             <el-pagination
-                v-model:page-size="this.pageSize"
-                :total="this.pageTotal"
-                v-model:current-page="this.currentPage"
+                v-model:page-size="pageSize"
+                :total="pageTotal"
+                v-model:current-page="currentPage"
                 @current-change="page"
                 layout="prev, pager, next"
             />
