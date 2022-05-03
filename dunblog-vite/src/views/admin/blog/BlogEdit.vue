@@ -1,42 +1,48 @@
 <template>
-  <el-form
-      :model="blogForm"
-      :rules="rules"
-      ref="blogFormRef"
-  >
+  <div class="page-title">
+    <span>博客编辑</span>
+  </div>
+  <div class="page-content">
+    <div class="blog-edit-container">
+    <el-form
+        :model="blogForm"
+        :rules="rules"
+        ref="blogFormRef"
+        style="display: flex;flex-direction: column;height: 100%"
+    >
 
-    <el-form-item label="标题" style="margin-top: 20px">
-      <el-input v-model="blogForm.title"></el-input>
-    </el-form-item>
-    <el-form-item label="分类">
-      <el-select v-model="blogForm.categoryId" class="m-2" placeholder="Select" size="large">
-        <el-option
-            v-for="(item,index) in categoryList"
-            :key="index"
-            :label="item.name"
-            :value="item.id"
-        />
-      </el-select>
-    </el-form-item>
-    <el-form-item>
-      <v-md-editor
-          v-model="blogForm.content"
-          height="600px"
-          @upload-image="handleUploadImage"
-          :disabled-menus="[]"
+      <el-form-item label="标题" style="margin-top: 20px">
+        <el-input v-model="blogForm.title"></el-input>
+      </el-form-item>
+      <el-form-item label="分类">
+        <el-select v-model="blogForm.categoryId" class="m-2" placeholder="Select" size="large">
+          <el-option
+              v-for="(item,index) in categoryList"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item style="flex: 1">
+        <v-md-editor
+            height="100%"
+            v-model="blogForm.content"
+            @upload-image="handleUploadImage"
+            :disabled-menus="[]"
 
-      ></v-md-editor>
-    </el-form-item>
+        ></v-md-editor>
+      </el-form-item>
 
-    <el-form-item>
-      <el-button type="primary" @click="submitForm(blogFormRef)">提交</el-button>
-    </el-form-item>
-  </el-form>
-
+      <el-form-item>
+        <el-button type="primary" @click="submitForm(blogFormRef)">提交</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-
 import {useRoute, useRouter} from "vue-router";
 import {onMounted, reactive, ref} from "vue";
 import {getBlogDetailById, uploadImg, blogEdit, getCategoryList} from "@/lib/api";
@@ -79,7 +85,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
           message: '提交成功',
           type: 'success',
         })
-        await router.push("/backstage")
+        await router.push("/admin/blog/list")
 
       }else {
       ElMessage.error('提交失败')
@@ -105,7 +111,7 @@ const handleUploadImage = async (event:any, insertImage:any, files:any) => {
   //图片回显
   insertImage({
     url:
-        axios.defaults.baseURL+'/viewphoto/'+resp,
+        axios.defaults.baseURL+'/viewphoto/'+resp.data,
     desc: '图片',
     width: 'auto',
     height: 'auto',
@@ -131,6 +137,8 @@ onMounted(async () => {
 
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.blog-edit-container {
+  height: 100%;
+}
 </style>

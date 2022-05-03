@@ -74,7 +74,7 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .pagination-block{
   display: flex;
   justify-content: center;

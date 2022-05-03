@@ -9,6 +9,7 @@ import '@/assets/css/common.css'
 import '@/assets/css/reset.css'
 import '@/assets/font/icon/iconfont.css'
 import 'element-plus/theme-chalk/el-message.css'
+import 'element-plus/theme-chalk/el-message-box.css'
 import 'default-passive-events'
 
 

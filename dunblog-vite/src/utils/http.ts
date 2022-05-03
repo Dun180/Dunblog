@@ -1,4 +1,4 @@
-import axios, {type AxiosRequestConfig} from "axios";
+import axios, {type AxiosRequestConfig, AxiosRequestHeaders} from "axios";
 
 // axios.defaults.baseURL = localStorage.getItem('BASE_URL')?.toString();
 // axios.defaults.baseURL ='http://localhost:8081'
@@ -40,9 +40,9 @@ interface ResType<T> {
 }
 
 interface Http {
-    get<T>(url: string, params?: unknown): Promise<T>;
+    get<T>(url: string, params?: unknown, headers?:AxiosRequestHeaders|undefined): Promise<T>;
 
-    post<T>(url: string, params?: unknown): Promise<T>;
+    post<T>(url: string, params?: unknown, config?: any): Promise<T>;
 
     upload<T>(url: string, params: unknown): Promise<T>;
 
@@ -54,10 +54,13 @@ interface Http {
 }
 
 const http: Http = {
-    get(url, params) {
+    get(url, params,headers) {
         return new Promise((resolve, reject) => {
             axios
-                .get(url, {params})
+                .get(url,
+                    {params:params,
+                            headers:headers,
+                    })
                 .then((res) => {
                     resolve(res.data);
                 })
@@ -67,10 +70,10 @@ const http: Http = {
         });
     },
 
-    post(url, params) {
+    post(url, params, config) {
         return new Promise((resolve, reject) => {
             axios
-                .post(url, params)
+                .post(url, params, config)
                 .then((res) => {
                     resolve(res.data);
                 })

@@ -132,3 +132,21 @@ div {
 #category:hover{
     color: black;
 }
+.page-title{
+    padding: 0 10px;
+    font-size: 24px;
+    color: #475669;
+    text-shadow: 2px 2px 3px rgba(31,45,61,0.2),-1px -1px #ffffff;
+    line-height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.page-content{
+    background: #ffffff;
+    box-shadow: 5px 8px 12px rgba(31,45,61,0.1);
+    padding: 32px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    flex: 1;
+}

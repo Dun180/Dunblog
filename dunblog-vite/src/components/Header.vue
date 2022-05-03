@@ -19,17 +19,17 @@
           default-active="1"
           class="el-menu-vertical-demo"
       >
-        <router-link :to="{name:'BlogList'}">
+        <router-link :to="{name:Pages.BlogList}">
           <el-menu-item index="1">
             <span>Home</span>
           </el-menu-item>
         </router-link>
-        <router-link :to="{name:'CategoryList'}">
+        <router-link :to="{name:Pages.CategoryList}">
           <el-menu-item index="2">
             <span>Categories</span>
           </el-menu-item>
         </router-link>
-        <router-link :to="{name:'Archives'}">
+        <router-link :to="{name:Pages.Archives}">
           <el-menu-item index="3" ref="pos">
             <span>Archives</span>
           </el-menu-item>
@@ -45,10 +45,10 @@
 
 <script setup lang="ts">
 import {getCurrentInstance, onMounted, onUnmounted} from "vue";
+import {Pages} from "@/router/pages";
 
 
 onMounted(async () => {
-  console.log(proxy)
   window.addEventListener("scroll", handleScroll); // 监听（绑定）滚轮滚动事件
 
 })
@@ -56,10 +56,6 @@ onUnmounted(async ()=>{
   window.removeEventListener("scroll", handleScroll);
 
 })
-
-
-const {proxy} = getCurrentInstance()
-
 
 const handleScroll = () => {
   let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop; //滚动高度

@@ -1,5 +1,10 @@
 <template>
-dashboard
+  <div class="page-title">
+    <span>仪表盘</span>
+  </div>
+  <div class="page-content">
+
+  </div>
 </template>
 
 <script>
@@ -8,6 +13,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

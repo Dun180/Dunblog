@@ -6,12 +6,11 @@
       <div class="main-inner">
         <div class="content-wrap">
           <div class="content">
-            <RouterView v-if="isRouterAlive"/>
-
+            <RouterView/>
           </div>
         </div>
         <aside class="sidebar">
-          <Sidebar></Sidebar>
+          <Sidebar v-if="false"></Sidebar>
         </aside>
       </div>
     </div>
@@ -39,17 +38,10 @@ setTimeout(() => {
   })
 }, 3000)
 
-const isRouterAlive = ref(true);
-const reload = () => {
-  isRouterAlive.value = false
-  nextTick(function () {
-    isRouterAlive.value = true
-  })
-}
-provide("reload",reload)
+
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 .sidebar{
   position: static;
@@ -57,4 +49,6 @@ provide("reload",reload)
   width: 239px;
   margin-top: 285px;
 }
+
+
 </style>

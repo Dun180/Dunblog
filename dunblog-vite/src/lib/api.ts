@@ -20,6 +20,12 @@ export async function login(form:any){
 
 }
 
+//检查token
+export async function checkToken(token:any){
+    const resp = await http.get<Result<{ checkResult:boolean }>>('/checkToken', null,{token:token})
+    return resp
+}
+
 
 //获取博客列表
 export async function getBlogList(currentPage:number,pageSize:number){
@@ -42,8 +48,8 @@ export async function deleteBlog(data:any){
 
 //上传图片
 export async function uploadImg(param:any,config:any){
-    const resp = await axios.post("/upload",param,config)
-    return resp.data.data
+    const resp = await http.post<Result<Object>>("/upload",param,config)
+    return resp
 }
 
 //博客编辑
@@ -58,6 +64,7 @@ export async function getCategoryList(){
     return resp
 }
 
+//通过id获取分类信息
 export async function getCategoryInfoById(id:number){
     const resp = await http.get<Result<CategoryInfo>>("/category/get",{categoryId:id})
     return resp

@@ -32,7 +32,7 @@
 import {ElMessage } from "element-plus";
 import {reactive, ref} from "vue";
 import type { FormInstance } from 'element-plus'
-import { useStore } from '@/store/index'
+import { useStore } from '@/store'
 import { useRouter } from 'vue-router'
 import {login} from "@/lib/api";
 import girlURL from '@/assets/img/girl.png'
@@ -76,7 +76,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
           message: '登录成功',
           type: 'success',
         })
-        await router.push("/backstage")
+        await router.push("/admin")
       } else {
         await router.push("/login")
         ElMessage({
@@ -102,7 +102,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .el-header {
 
   color: #333;
