@@ -63,6 +63,11 @@ const routes: Array<RouteRecordRaw> = [
                 name: Pages.BlogEdit_Admin,
                 component: () => import("@/views/admin/blog/BlogEdit.vue"),
             },
+            {
+                path: 'tag/list',
+                name: Pages.TagList_Admin,
+                component: () => import("@/views/admin/tag/TagList.vue"),
+            },
         ],
         meta: {
             requireAuth: true

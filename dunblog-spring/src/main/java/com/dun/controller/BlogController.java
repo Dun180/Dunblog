@@ -28,7 +28,7 @@ public class BlogController {
 //            blog.setCategoryId(1);
 
             if(blogService.saveOrUpdate(blog)){
-                return Result.succ(true);
+                return Result.succ(blog.getId());
             }else{
                 return Result.fail("提交失败");
             }

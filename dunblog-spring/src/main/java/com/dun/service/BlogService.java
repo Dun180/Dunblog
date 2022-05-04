@@ -26,4 +26,9 @@ public interface BlogService extends IService<Blog> {
      *
      */
     Map<String,Object> getBlogDetailById(Integer id);
+
+    /**
+     * 通过ID查询博客标签数据
+     */
+    List<Map<String,Object>> getBlogTagInfo(Integer id);
 }

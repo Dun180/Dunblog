@@ -8,13 +8,14 @@ import com.dun.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
 @Service("blogService")
 public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService {
 
-    @Autowired
+    @Resource
     BlogMapper blogMapper;
 
 
@@ -31,5 +32,10 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     @Override
     public Map<String, Object> getBlogDetailById(Integer id) {
         return blogMapper.getBlogDetailById(id);
+    }
+
+    @Override
+    public List<Map<String, Object>> getBlogTagInfo(Integer id) {
+        return blogMapper.getBlogTagInfo(id);
     }
 }

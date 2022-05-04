@@ -49,16 +49,27 @@
             blog.create_time AS createTime,
             blog.category_id AS categoryId,
             category.`name` AS categoryName,
-            category.id AS categoryId
+            category.id AS categoryId,
+            GROUP_CONCAT(tag.id) AS tagId,
+            GROUP_CONCAT(tag.name) AS tagName
         FROM
             blog
                 INNER JOIN
             category
             ON
                 blog.category_id = category.id
+                LEFT JOIN
+            blog_tag_rel
+            ON
+                blog.id = blog_tag_rel.blog_id
+                LEFT JOIN
+            tag
+            ON
+                blog_tag_rel.tag_id = tag.id
         WHERE
             blog.id = #{id}
     </select>
+
 </mapper>
 
 

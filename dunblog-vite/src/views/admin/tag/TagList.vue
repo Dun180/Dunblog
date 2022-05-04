@@ -1,10 +1,10 @@
 <template>
   <div class="page-title">
-    <span>分类列表</span>
+    <span>标签列表</span>
   </div>
   <div class="page-content">
-    <div class="category-list-container">
-      <el-table :data="categoryList" style="width: 100%">
+    <div class="tag-list-container">
+      <el-table :data="tagList" style="width: 100%">
 
         <el-table-column label="Name" prop="name" />
         <el-table-column label="CreateTime" width="180">
@@ -19,7 +19,7 @@
             <el-popover placement="bottom" :width="400" trigger="click" v-model:visible="addVisible">
               <template #reference>
                 <button class="btn" @click="addVisible = true">
-                  添加分类
+                  添加标签
                 </button>
               </template>
               <el-input v-model="input" placeholder="Please input" />
@@ -78,13 +78,13 @@
 <script setup lang="ts">
 import {ElMessage} from "element-plus";
 import {inject, onMounted, ref} from "vue";
-import {CategoryInfo} from "@/models/category";
-import {deleteCategory, getCategoryList, addCategory, editCategory} from "@/lib/api";
+import {deleteTag, getTagList, addTag, editTag} from "@/lib/api";
 import moment from "moment";
+import {TagInfo} from "@/models/tag";
 
 
 const reload = inject("reload", Function)
-let categoryList = ref([] as CategoryInfo[])
+let tagList = ref([] as TagInfo[])
 let addVisible = ref(false)
 let editVisibleIndex = ref(-1)
 let input = ref('')
@@ -101,7 +101,7 @@ const handleAdd = async () => {
   const data = {
     name: input.value
   }
-  const resp = await addCategory(data);
+  const resp = await addTag(data);
   if (resp.code == 200) {
     reload()
     ElMessage({
@@ -131,7 +131,7 @@ const handleEdit = async (index:any, row:any) => {
     id:row.id,
     name:input.value
   }
-  const resp = await editCategory(data);
+  const resp = await editTag(data);
   if (resp.code == 200) {
     reload()
     ElMessage({
@@ -153,7 +153,7 @@ const handleDelete = async (index:any, row:any) => {
     id:row.id
   }
 
-  const resp = await deleteCategory(data);
+  const resp = await deleteTag(data);
   if (resp.code == 200) {
     reload()
     ElMessage({
@@ -168,16 +168,16 @@ const handleDelete = async (index:any, row:any) => {
   }
 }
 onMounted(async () => {
-  const resp = await getCategoryList();
+  const resp = await getTagList();
   if (resp.code == 200) {
-    categoryList.value = Object.values(resp.data)
+    tagList.value = Object.values(resp.data)
   }
 })
 
 </script>
 
 <style scoped lang="scss">
-.category-list-container{
+.tag-list-container{
   height: 100%;
 }
 </style>

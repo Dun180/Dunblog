@@ -36,6 +36,11 @@
               <span>分类</span>
             </el-menu-item>
           </router-link>
+          <router-link :to="{name:Pages.TagList_Admin}">
+            <el-menu-item index="4" >
+              <span>标签</span>
+            </el-menu-item>
+          </router-link>
 
         </el-menu>
 

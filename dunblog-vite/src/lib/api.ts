@@ -3,8 +3,10 @@ import axios from "axios";
 import {BlogProfile, BlogProfiles} from "@/models/blog";
 import {Response, Result} from "@/models/result";
 import {CategoryInfo} from "@/models/category";
+import {TagInfo} from "@/models/tag";
 
 
+//#region login
 //登录
 export async function login(form:any){
     const resp = new Promise<Response>(async (resolve, reject) => {
@@ -26,7 +28,9 @@ export async function checkToken(token:any){
     return resp
 }
 
+//#endregion
 
+//#region blog
 //获取博客列表
 export async function getBlogList(currentPage:number,pageSize:number){
     const resp = await http.get<Result<BlogProfiles>>('/blog/list',{currentPage:currentPage,pageSize:pageSize})
@@ -37,7 +41,6 @@ export async function getBlogList(currentPage:number,pageSize:number){
 export async function getBlogDetailById(blogId:number){
     const resp = await http.get<Result<BlogProfile>>("/blog/get",{blogId:blogId})
     return resp
-
 }
 
 //删除博客
@@ -57,7 +60,9 @@ export async function blogEdit(form:any){
     const resp = await http.post<Result<Object>>("/blog/edit",form)
     return resp
 }
+//#endregion
 
+//#region category
 //分类列表
 export async function getCategoryList(){
     const resp = await http.get<Result<CategoryInfo[]>>("/category/list")
@@ -71,7 +76,7 @@ export async function getCategoryInfoById(id:number){
 }
 
 //分类编辑
-export async function categoryEdit(data:any){
+export async function editCategory(data:any){
     const resp = await http.post<Result<Object>>("/category/edit",data)
     return resp
 }
@@ -97,4 +102,41 @@ export async function getBlogListByCategoryId(categoryId:number, currentPage:num
     })
     return resp
 }
+//#endregion
+
+//#region tag
+
+//标签列表
+export async function getTagList(){
+    const resp = await http.get<Result<TagInfo[]>>("/tag/list")
+    return resp
+}
+
+//标签编辑
+export async function editTag(data:any){
+    const resp = await http.post<Result<Object>>("/tag/edit",data)
+    return resp
+}
+
+//删除标签
+export async function deleteTag(data:any){
+    const resp = await http.post<Result<Object>>("/tag/delete",data)
+    return resp
+}
+
+//添加标签
+export async function addTag(data:any){
+    const resp = await http.post<Result<Object>>("/tag/add",data)
+    return resp
+}
+
+//关联博客和标签
+export async function relBlogAndTag(blogId:number, tags:number[]){
+    const resp = await http.post<Result<Object>>("/tag/rel",{blogId:blogId,tags:tags})
+    return resp
+}
+//#endregion
+
+
+
 
