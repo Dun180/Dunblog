@@ -10,7 +10,7 @@
               <router-link class="post-title-link" :to="{name: Pages.BlogDetail,params: {blogId: blog.id}}">{{blog.title}}</router-link>
           </h1>
           <div class="post-meta">
-                    <span class="post-time">
+            <span class="post-time">
                       <span class="post-meta-item-icon">
                         <i class="iconfont icon-calendar"></i>
                       </span>
@@ -40,6 +40,9 @@
                       </span>
               <span class="post-meta-item-text">Reading time ≈ </span>
               <span> {{ blog.readTime }} min </span>
+            </div>
+            <div class="post-tags">
+              <el-tag type="info" v-for="tag in blog.tagNameList">{{tag}}</el-tag>
             </div>
           </div>
         </header>
@@ -76,15 +79,20 @@ import moment from "moment";
 import {reactive, ref,Ref} from 'vue'
 import {onMounted} from "vue";
 
-let blogList = ref([] as BlogProfile[])
-let pageSize=ref(4);
-let pageTotal=ref(1);
-let currentPage=ref(1);
+const blogList = ref([] as BlogProfile[])
+const pageSize=ref(4);
+const pageTotal=ref(1);
+const currentPage=ref(1);
 
 const page = async (currentPage: number): Promise<void> => {
   const res = await getBlogList(currentPage, pageSize.value)
   if (res.code == 200) {
     blogList.value = res.data.records
+    for (let i = 0; i < blogList.value.length; i++) {
+      if (blogList.value[i].tagName!=undefined){
+        blogList.value[i].tagNameList = blogList.value[i].tagName.split(',')
+      }
+    }
     pageSize.value = res.data.size
     pageTotal.value = res.data.total
   }
@@ -118,5 +126,11 @@ body {
 .pagination-block{
   display: flex;
   justify-content: center;
+}
+.post-tags .el-tag{
+  margin-right: 10px;
+}
+.post-block{
+  height: 280px;
 }
 </style>

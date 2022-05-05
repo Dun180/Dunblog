@@ -9,6 +9,7 @@ export interface BlogProfile {
     createTime: string;
     tagId:string;
     tagName:string;
+    tagNameList:object;
 }
 
 export interface BlogProfiles{

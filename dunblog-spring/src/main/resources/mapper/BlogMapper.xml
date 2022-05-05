@@ -5,18 +5,29 @@
 <!--    获取全部博客-->
     <select id="getBlogList" resultType="java.util.HashMap">
         SELECT
-        blog.id AS id,
-        blog.title AS title,
-        blog.content AS content,
-        blog.create_time AS createTime,
-        category.`name` AS categoryName,
-        category.id AS categoryId
+            blog.id AS id,
+            blog.title AS title,
+            blog.content AS content,
+            blog.create_time AS createTime,
+            category.`name` AS categoryName,
+            category.id AS categoryId,
+            GROUP_CONCAT(tag.name) AS tagName
         FROM
-        blog
-        INNER JOIN
-        category
-        ON
-        blog.category_id = category.id
+            blog
+                INNER JOIN
+            category
+            ON
+                blog.category_id = category.id
+                LEFT JOIN
+            blog_tag_rel
+            ON
+                blog.id = blog_tag_rel.blog_id
+                LEFT JOIN
+            tag
+            ON
+                blog_tag_rel.tag_id = tag.id
+        GROUP BY
+            blog.id
         ORDER BY
             createTime DESC
     </select>
@@ -49,7 +60,6 @@
             blog.create_time AS createTime,
             blog.category_id AS categoryId,
             category.`name` AS categoryName,
-            category.id AS categoryId,
             GROUP_CONCAT(tag.id) AS tagId,
             GROUP_CONCAT(tag.name) AS tagName
         FROM

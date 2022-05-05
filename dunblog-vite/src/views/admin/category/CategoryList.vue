@@ -84,10 +84,10 @@ import moment from "moment";
 
 
 const reload = inject("reload", Function)
-let categoryList = ref([] as CategoryInfo[])
-let addVisible = ref(false)
-let editVisibleIndex = ref(-1)
-let input = ref('')
+const categoryList = ref([] as CategoryInfo[])
+const addVisible = ref(false)
+const editVisibleIndex = ref(-1)
+const input = ref('')
 
 const handleAdd = async () => {
   if (input.value == '') {

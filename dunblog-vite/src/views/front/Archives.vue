@@ -44,10 +44,10 @@ import moment from "moment";
 import {reactive, ref,Ref} from 'vue'
 import {onMounted} from "vue";
 
-let blogList = ref([] as BlogProfile[])
-let pageSize=ref(10);
-let pageTotal=ref(1);
-let currentPage=ref(1);
+const blogList = ref([] as BlogProfile[])
+const pageSize=ref(10);
+const pageTotal=ref(1);
+const currentPage=ref(1);
 
 const page = async (currentPage: number): Promise<void> => {
   const res = await getBlogList(currentPage, pageSize.value)

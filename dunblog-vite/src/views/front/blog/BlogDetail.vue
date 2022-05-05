@@ -40,6 +40,9 @@
               <span class="post-meta-item-text">Reading time ≈ </span>
               <span> {{ blog.readTime }} min </span>
             </div>
+            <div class="post-tags">
+              <el-tag type="info" v-for="tag in blog.tagNameList">{{tag}}</el-tag>
+            </div>
           </div>
         </header>
         <div class="post-body">
@@ -69,6 +72,9 @@ onMounted(async () => {
     const res = await getBlogDetailById(Number(blogId.value))
     if (res.code == 200) {
       blog.value = res.data
+      if (blog.value.tagName!=undefined){
+        blog.value.tagNameList = blog.value.tagName.split(',')
+      }
     }
   }
 })
@@ -96,5 +102,8 @@ body {
 }
 .category-router:hover{
   color: #000000;
+}
+.post-tags .el-tag{
+  margin-right: 10px;
 }
 </style>

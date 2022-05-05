@@ -166,7 +166,10 @@ onMounted(async () => {
       blogForm.title = res.data.title
       blogForm.content = res.data.content
       blogForm.categoryId = res.data.categoryId
-      blogForm.tags = res.data.tagId.split(",").map(Number)
+      if(res.data.tagId!=undefined){
+        blogForm.tags = res.data.tagId.split(",").map(Number)
+
+      }
     }
   }
   const cresp = await getCategoryList();

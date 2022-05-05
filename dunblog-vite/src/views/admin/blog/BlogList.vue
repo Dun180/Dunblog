@@ -64,10 +64,10 @@ import {Pages} from "@/router/pages";
 
 const reload = inject("reload", Function)
 
-let blogList = ref([] as BlogProfile[])
-let pageSize=ref(10);
-let pageTotal=ref(5);
-let currentPage=ref(1);
+const blogList = ref([] as BlogProfile[])
+const pageSize=ref(10);
+const pageTotal=ref(5);
+const currentPage=ref(1);
 
 
 const handleDelete = async (index:any, row:any) => {
