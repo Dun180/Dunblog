@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dun.mapper.TagMapper">
+
+    <!--根据博客id获取标签id-->
+    <select id="getTagIdByBlogId" resultType="Integer">
+        SELECT
+            tag.id AS tagId
+        FROM
+            blog
+                INNER JOIN
+            blog_tag_rel
+            ON
+                blog.id = blog_tag_rel.blog_id
+                INNER JOIN
+            tag
+            ON
+                blog_tag_rel.tag_id = tag.id
+        WHERE
+            blog.id = #{id}
+    </select>
+</mapper>

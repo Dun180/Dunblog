@@ -7,6 +7,8 @@ export interface BlogProfile {
     categoryId: number;
     readTime: number;
     createTime: string;
+    tagId:string;
+    tagName:string;
 }
 
 export interface BlogProfiles{
