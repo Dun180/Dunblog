@@ -1,15 +1,18 @@
 package com.dun.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dun.common.lang.Result;
+import com.dun.entity.Blog;
 import com.dun.entity.Category;
 import com.dun.service.BlogService;
 import com.dun.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -36,8 +39,15 @@ public class CategoryController {
     @PostMapping("/delete")
     public Result deleteCategory(@RequestBody Category category){
         try {
+            //默认分组无法删除
             if(category.getId()==1){
                 return Result.fail("删除失败");
+            }
+            //其他分组删除前将其中的博客移入默认分组
+            List<Blog> blogList = blogService.list(new QueryWrapper<Blog>().eq("category_id", category.getId()));
+            for (Blog blog:blogList) {
+                blog.setCategoryId(1);
+                blogService.saveOrUpdate(blog);
             }
             boolean result = categoryService.removeById(category.getId());
             if (result){
