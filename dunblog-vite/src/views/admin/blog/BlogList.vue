@@ -4,7 +4,7 @@
   </div>
   <div class="page-content">
     <div class="blog-list-container">
-      <el-table :data="blogList" style="width: 100%">
+      <el-table :data="blogList" style="width: inherit;">
         <el-table-column label="Date" width="180">
           <template #default="scope">
             <div style="display: flex; align-items: center">
@@ -111,8 +111,12 @@ onMounted(async () => {
 .blog-list-container{
   height: 100%;
 }
+.page-content{
+
+}
 .pagination-block{
   display: flex;
   justify-content: center;
 }
+
 </style>

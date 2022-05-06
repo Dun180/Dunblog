@@ -106,4 +106,7 @@ body {
 .post-tags .el-tag{
   margin-right: 10px;
 }
+.post-body{
+  margin-top: 30px;
+}
 </style>

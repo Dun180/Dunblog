@@ -27,8 +27,9 @@ provide("reload",reload)
 <style scoped lang="scss">
 .admin-container{
   height: 100vh;
-  width: 100%;
   max-height: inherit;
+  background: #f0f2f7;
+
 }
 .wrapper {
   //display: grid;
@@ -37,12 +38,13 @@ provide("reload",reload)
   flex-direction: row;
   height: 100%;
 
-
 }
 .admin-page{
   padding: 0 15px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  width: calc(100% - 13vw);
+  min-width: 760px;
 }
 </style>

@@ -133,4 +133,9 @@ body {
 .post-block{
   height: 280px;
 }
+.post-expand .post-block{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+}
 </style>

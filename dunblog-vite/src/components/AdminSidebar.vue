@@ -58,12 +58,14 @@ import {Pages} from "@/router/pages";
 
 <style scoped lang="scss">
 .admin-sidebar{
-  background: #f0f2f7;
-  width: 256px;
+
+  width: 13vw;
+  min-width: 160px;
   transition: .35s;
   height: 100%;
   border-right: 1px solid #E5E9F2;
   box-shadow: 1px 0 rgba(255,255,255,0.5);
+  overflow: hidden;
 }
 .admin-sidebar-container{
   height: 100%;
