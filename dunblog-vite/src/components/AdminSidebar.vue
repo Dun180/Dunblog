@@ -42,6 +42,21 @@
             </el-menu-item>
           </router-link>
 
+          <el-sub-menu index="5">
+            <template #title>
+              <span>日记</span>
+
+            </template>
+            <router-link :to="{name:Pages.BlogList_Admin}">
+              <el-menu-item index="1-1">查看日志</el-menu-item>
+            </router-link>
+
+            <router-link :to="{name:Pages.BlogEdit_Admin}">
+              <el-menu-item index="1-2">新建日志</el-menu-item>
+            </router-link>
+
+          </el-sub-menu>
+
         </el-menu>
 
       </div>
