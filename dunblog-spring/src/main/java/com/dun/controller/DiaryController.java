@@ -2,6 +2,7 @@ package com.dun.controller;
 
 
 import com.dun.common.lang.Result;
+import com.dun.entity.Category;
 import com.dun.entity.Diary;
 import com.dun.entity.Tag;
 import com.dun.service.DiaryService;
@@ -22,7 +23,7 @@ public class DiaryController {
     @PostMapping("/add")
     public Result addDiary(@RequestBody Diary diary){
         try {
-
+            diary.setCreatorId(2);
             return Result.succ(diaryService.save(diary));
         }catch (Exception e){
             return Result.fail(e.getMessage());
@@ -46,6 +47,7 @@ public class DiaryController {
     @PostMapping("/edit")
     public Result editDiary(@RequestBody Diary diary){
         try {
+            diary.setCreatorId(2);
 
             boolean result = diaryService.saveOrUpdate(diary);
             if (result){
@@ -62,6 +64,18 @@ public class DiaryController {
     public Result getDiaryList(){
         try{
             return Result.succ(diaryService.list());
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+    }
+
+    @GetMapping("/get")
+    public Result getDiary(@RequestParam(value = "diaryId") Integer categoryId){
+        try{
+            Diary diary = diaryService.getById(categoryId);
+
+            return Result.succ(diary);
+
         }catch (Exception e){
             return Result.fail(e.getMessage());
         }

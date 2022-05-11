@@ -20,7 +20,7 @@ public class Blog {
     private String title;
     private String content;
     private Integer categoryId;
-
+    private Integer state;
 
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;

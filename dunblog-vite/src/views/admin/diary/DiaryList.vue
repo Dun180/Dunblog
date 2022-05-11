@@ -1,6 +1,6 @@
 <template>
   <div class="page-title">
-    <span>博客列表</span>
+    <span>日记列表</span>
   </div>
   <div class="page-content">
     <div class="blog-list-container">

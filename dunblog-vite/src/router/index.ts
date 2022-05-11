@@ -5,38 +5,46 @@ import axios from "axios";
 import {checkToken} from "@/lib/api";
 
 
+const ISMOBILE = function () {
+    let flag = navigator.userAgent.match(
+        /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+    );
+    return flag;
+};
+
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: Pages.Front,
-        component: () => import("@/views/front/Front.vue"),
+        component: () => ISMOBILE() ? import("@/views/front/mobile/Front.vue") : import("@/views/front/pc/Front.vue"),
         children: [
             {
                 path: '',
                 name: Pages.BlogList,
-                component: () => import("@/views/front/blog/BlogList.vue"),
+                component: () => import("@/views/front/pc/blog/BlogList.vue"),
+                // component: () => ISMOBILE() ? import("@/views/front/blog/BlogList.vue") : import("@/views/front/category/CategoryList.vue"),
             },
             {
                 path: 'blog/:blogId',
                 name: Pages.BlogDetail,
-                component: () => import("@/views/front/blog/BlogDetail.vue")
+                component: () => import("@/views/front/pc/blog/BlogDetail.vue")
             },
             {
                 path: 'categories',
                 name: Pages.CategoryList,
-                component: () => import("@/views/front/category/CategoryList.vue")
+                component: () => import("@/views/front/pc/category/CategoryList.vue")
             },
             {
                 path: 'category/:categoryId',
                 name: Pages.CategoryDetail,
-                component: () => import("@/views/front/category/CategoryDetail.vue"),
+                component: () => import("@/views/front/pc/category/CategoryDetail.vue"),
             },
             {
                 path: 'archives',
                 name: Pages.Archives,
-                component: () => import("@/views/front/Archives.vue")
+                component: () => import("@/views/front/pc/Archives.vue")
             },
-        ]
+        ],
     },
     {
         path: '/admin',
@@ -54,19 +62,29 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("@/views/admin/blog/BlogList.vue"),
             },
             {
-                path: 'category/list',
-                name: Pages.CategoryList_Admin,
-                component: () => import("@/views/admin/category/CategoryList.vue"),
-            },
-            {
                 path: 'blog/edit',
                 name: Pages.BlogEdit_Admin,
                 component: () => import("@/views/admin/blog/BlogEdit.vue"),
             },
             {
+                path: 'category/list',
+                name: Pages.CategoryList_Admin,
+                component: () => import("@/views/admin/category/CategoryList.vue"),
+            },
+            {
                 path: 'tag/list',
                 name: Pages.TagList_Admin,
                 component: () => import("@/views/admin/tag/TagList.vue"),
+            },
+            {
+                path: 'diary/list',
+                name: Pages.DiaryList_Admin,
+                component: () => import("@/views/admin/diary/DiaryList.vue"),
+            },
+            {
+                path: 'diary/edit',
+                name: Pages.DiaryEdit_Admin,
+                component: () => import("@/views/admin/diary/DiaryEdit.vue"),
             },
         ],
         meta: {

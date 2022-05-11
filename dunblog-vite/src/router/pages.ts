@@ -12,6 +12,7 @@ export const Pages = {
     BlogList_Admin:'BlogList_Admin',
     CategoryList_Admin:'CategoryList_Admin',
     BlogEdit_Admin:'BlogEdit_Admin',
-    TagList_Admin:'TagList_Admin'
-
+    TagList_Admin:'TagList_Admin',
+    DiaryList_Admin:'DiaryList_Admin',
+    DiaryEdit_Admin:'DiaryEdit_Admin',
 }

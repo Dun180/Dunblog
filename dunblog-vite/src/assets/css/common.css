@@ -42,7 +42,6 @@ div {
 .container {
     position: relative;
     min-height: 100%;
-    *zoom: 1;
     padding-bottom: 72px;
 }
 .container:before,.container:after {

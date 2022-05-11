@@ -25,10 +25,10 @@
 
             </template>
             <router-link :to="{name:Pages.BlogList_Admin}">
-              <el-menu-item index="1-1">所有博客</el-menu-item>
+              <el-menu-item index="2-1">所有博客</el-menu-item>
             </router-link>
             <router-link :to="{name:Pages.BlogEdit_Admin}">
-              <el-menu-item index="1-2">新建博客</el-menu-item>
+              <el-menu-item index="2-2">新建博客</el-menu-item>
             </router-link>
           </el-sub-menu>
           <router-link :to="{name:Pages.CategoryList_Admin}">
@@ -47,12 +47,12 @@
               <span>日记</span>
 
             </template>
-            <router-link :to="{name:Pages.BlogList_Admin}">
-              <el-menu-item index="1-1">查看日志</el-menu-item>
+            <router-link :to="{name:Pages.DiaryList_Admin}">
+              <el-menu-item index="5-1">查看日志</el-menu-item>
             </router-link>
 
-            <router-link :to="{name:Pages.BlogEdit_Admin}">
-              <el-menu-item index="1-2">新建日志</el-menu-item>
+            <router-link :to="{name:Pages.DiaryEdit_Admin}">
+              <el-menu-item index="5-2">新建日志</el-menu-item>
             </router-link>
 
           </el-sub-menu>
