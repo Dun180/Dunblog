@@ -2,11 +2,8 @@ package com.dun.controller;
 
 
 import com.dun.common.lang.Result;
-import com.dun.entity.Category;
 import com.dun.entity.Diary;
-import com.dun.entity.Tag;
 import com.dun.service.DiaryService;
-import com.dun.service.TagService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

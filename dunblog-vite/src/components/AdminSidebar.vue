@@ -5,7 +5,7 @@
       <div class="logo-wrapper">
         <div class="wrapper">
           <div class="logo"></div>
-          <div class="title">dunBlog</div>
+          <div class="title">DunBlog</div>
         </div>
       </div>
       <div class="menu-wrapper">

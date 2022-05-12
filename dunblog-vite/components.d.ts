@@ -29,6 +29,9 @@ declare module 'vue' {
     Footer: typeof import('./src/components/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Sidebar: typeof import('./src/components/Sidebar.vue')['default']
+    VanConfigProvider: typeof import('vant/es')['ConfigProvider']
+    VanNavBar: typeof import('vant/es')['NavBar']
+    VanPopup: typeof import('vant/es')['Popup']
   }
 }
 

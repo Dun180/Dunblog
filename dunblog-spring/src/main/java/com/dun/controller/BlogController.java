@@ -42,14 +42,18 @@ public class BlogController {
     public Result getBlogList(@RequestParam(value = "currentPage") Long currentPage,@RequestParam(value = "pageSize") Long pageSize){
 
         try{
+            //调整currentPage，防止出错
             if(currentPage == null || currentPage < 1) currentPage = (long)1;
             Page<Map<String, Object>> page = new Page<>(currentPage,pageSize);
             IPage<Map<String, Object>> iPage = blogService.getBlogList(page);
+            //获取查询结果，进行处理
             List<Map<String, Object>> blogList = iPage.getRecords();
             for(Map<String, Object> map:blogList){
+                //计算content长度
                 int count = map.get("content").toString().length();
                 map.put("readTime",count/300+1);
                 if (count > 100){
+                    //大于100时截取前100个字符
                     map.put("content",map.get("content").toString().substring(0,100));
                     String formatCount = String.format("%.1f", (float)count / 1000.0);
                     map.put("count",formatCount+'k');

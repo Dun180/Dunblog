@@ -138,4 +138,7 @@ body {
   flex-direction: column;
   justify-content:space-between;
 }
+.post-body{
+  overflow: hidden;
+}
 </style>

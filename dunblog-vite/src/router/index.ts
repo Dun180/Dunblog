@@ -49,42 +49,42 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/admin',
         name: Pages.Admin,
-        component: () => import("@/views/admin/Admin.vue"),
+        component: () => ISMOBILE() ? import("@/views/admin/mobile/Admin.vue") : import("@/views/admin/pc/Admin.vue"),
         children: [
             {
                 path: '',
                 name: Pages.Dashboard,
-                component: () => import("@/views/admin/Dashboard.vue"),
+                component: () => import("@/views/admin/pc/Dashboard.vue"),
             },
             {
                 path: 'blog/list',
                 name: Pages.BlogList_Admin,
-                component: () => import("@/views/admin/blog/BlogList.vue"),
+                component: () => import("@/views/admin/pc/blog/BlogList.vue"),
             },
             {
                 path: 'blog/edit',
                 name: Pages.BlogEdit_Admin,
-                component: () => import("@/views/admin/blog/BlogEdit.vue"),
+                component: () => import("@/views/admin/pc/blog/BlogEdit.vue"),
             },
             {
                 path: 'category/list',
                 name: Pages.CategoryList_Admin,
-                component: () => import("@/views/admin/category/CategoryList.vue"),
+                component: () => import("@/views/admin/pc/category/CategoryList.vue"),
             },
             {
                 path: 'tag/list',
                 name: Pages.TagList_Admin,
-                component: () => import("@/views/admin/tag/TagList.vue"),
+                component: () => import("@/views/admin/pc/tag/TagList.vue"),
             },
             {
                 path: 'diary/list',
                 name: Pages.DiaryList_Admin,
-                component: () => import("@/views/admin/diary/DiaryList.vue"),
+                component: () => import("@/views/admin/pc/diary/DiaryList.vue"),
             },
             {
                 path: 'diary/edit',
                 name: Pages.DiaryEdit_Admin,
-                component: () => import("@/views/admin/diary/DiaryEdit.vue"),
+                component: () => import("@/views/admin/pc/diary/DiaryEdit.vue"),
             },
         ],
         meta: {
@@ -94,7 +94,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/login',
         name: Pages.Login_Admin,
-        component: () => import("@/views/admin/login/Login.vue"),
+        component: () => import("@/views/admin/pc/login/Login.vue"),
     },
     {
         path: '/error',
