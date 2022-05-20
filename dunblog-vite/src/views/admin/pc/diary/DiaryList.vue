@@ -39,7 +39,7 @@ const diaryList = ref([] as DiaryInfo[])
 
 onMounted(async () => {
   const resp = await getDiaryList();
-  diaryList.value = resp.data
+  diaryList.value = resp.data.reverse()
   console.log(diaryList.value)
 })
 
