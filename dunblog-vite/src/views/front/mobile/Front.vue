@@ -14,11 +14,12 @@
   </div>
 
   <van-popup v-model:show="showPopup" position="left" style="height: 100%;">
-    <Sidebar></Sidebar>
+    <MobileSidebar></MobileSidebar>
   </van-popup>
 </template>
 
 <script setup lang="ts">
+import MobileSidebar from '@/components/MobileSidebar.vue'
 
 import {ref} from "vue";
 

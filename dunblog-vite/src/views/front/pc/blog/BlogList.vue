@@ -132,6 +132,7 @@ body {
 }
 .post-block{
   height: 280px;
+  min-width: 200px;
 }
 .post-expand .post-block{
   display: flex;

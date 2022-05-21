@@ -46,27 +46,34 @@
           </div>
         </header>
         <div class="post-body">
-          <v-md-preview :text="blog.content"></v-md-preview>
+          <v-md-preview :text="blog.content" ref="preview"></v-md-preview>
 
         </div>
       </div>
     </article>
   </section>
+
 </template>
 
 <script setup lang="ts">
 import {useRoute} from "vue-router";
-import {onMounted, ref} from "vue";
+import {onMounted, onUpdated, reactive, ref, watchEffect} from "vue";
 import {getBlogDetailById} from "@/lib/api";
 import {BlogProfile} from "@/models/blog";
 import moment from "moment";
 import {Pages} from "@/router/pages";
+import bus from '@/lib/bus'
 
 
 const route = useRoute()
 
+const preview = ref(null)
+
 const blogId = ref(route.params.blogId)
 const blog = ref({} as BlogProfile)
+const titles = ref()
+
+
 onMounted(async () => {
   if(blogId.value){
     const res = await getBlogDetailById(Number(blogId.value))
@@ -77,9 +84,26 @@ onMounted(async () => {
       }
     }
   }
+  console.log(preview.value)
 })
 
-
+onUpdated(() => {
+  console.log(preview.value?.$el.querySelectorAll('h1,h2,h3,h4,h5,h6'))
+  const anchors = preview.value?.$el.querySelectorAll('h1,h2,h3,h4,h5,h6')
+  titles.value = Array.from(anchors).filter((title:any) => !!title.innerText.trim())
+  if (!titles.value.length) {
+    titles.value = []
+    return
+  }
+  const hTags = Array.from(new Set(titles.value.map((title:any) => title.tagName))).sort()
+  titles.value = titles.value.map((el:any) => ({
+    title: el.innerText,
+    lineIndex: el.getAttribute('data-v-md-line'),
+    indent: hTags.indexOf(el.tagName)
+  }))
+  bus.emit('initializationTitle', titles.value);
+  bus.emit('initializationPreview', preview.value);
+})
 
 </script>
 
@@ -91,8 +115,9 @@ body {
   background-color: palevioletred;
   color: white;
 }
-.post-block{
+.post-block {
   min-height: 660px;
+  min-width: 200px;
 }
 .category-router {
   color: #555;
@@ -100,13 +125,14 @@ body {
   outline: none;
   word-wrap: break-word;
 }
-.category-router:hover{
+.category-router:hover {
   color: #000000;
 }
-.post-tags .el-tag{
+.post-tags .el-tag {
   margin-right: 10px;
 }
-.post-body{
+.post-body {
   margin-top: 30px;
 }
+
 </style>

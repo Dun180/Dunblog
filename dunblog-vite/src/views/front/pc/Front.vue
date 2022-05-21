@@ -10,7 +10,7 @@
           </div>
         </div>
         <aside class="sidebar">
-          <Sidebar v-if="false"></Sidebar>
+          <Sidebar></Sidebar>
         </aside>
       </div>
     </div>
@@ -21,6 +21,8 @@
 <script setup lang="ts">
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import Sidebar from '@/components/Sidebar.vue'
+
 import {nextTick, provide, ref} from "vue";
 
 
@@ -46,9 +48,7 @@ setTimeout(() => {
 .sidebar{
   position: static;
   float: left;
-  width: 239px;
   margin-top: 285px;
 }
-
 
 </style>
