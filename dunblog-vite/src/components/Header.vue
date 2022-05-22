@@ -59,7 +59,7 @@ onUnmounted(async ()=>{
 
 const handleScroll = () => {
   let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop; //滚动高度
-  let element = document.querySelector(".return-top");
+  let element = document.querySelector(".return-top") as HTMLElement
 
   if (scrollHeight>400){
     element.style.transform = "translateY(0px)"

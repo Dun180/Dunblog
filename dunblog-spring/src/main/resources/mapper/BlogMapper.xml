@@ -59,6 +59,7 @@
             blog.content AS content,
             blog.create_time AS createTime,
             blog.category_id AS categoryId,
+            blog.state AS state,
             category.`name` AS categoryName,
             GROUP_CONCAT(tag.id) AS tagId,
             GROUP_CONCAT(tag.name) AS tagName

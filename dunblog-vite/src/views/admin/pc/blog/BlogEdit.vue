@@ -17,7 +17,14 @@
       <div class="form-inline">
 
         <el-form-item label="分类" style="margin-right: 30px">
-          <el-select v-model="blogForm.categoryId" class="m-2" placeholder="Select" size="large">
+          <el-select
+              v-model="blogForm.categoryId"
+              class="m-2"
+              placeholder="Select"
+              size="large"
+              style="width: 240px"
+
+          >
             <el-option
                 v-for="(item,index) in categoryList"
                 :key="index"
@@ -27,7 +34,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="标签">
+        <el-form-item label="标签" style="margin-right: 30px">
           <el-select
               v-model="blogForm.tags"
               multiple
@@ -45,7 +52,17 @@
             />
           </el-select>
         </el-form-item>
+        <el-form-item label="状态">
+          <el-select
+              v-model="blogForm.state"
+              size="large"
+              style="width: 240px"
 
+          >
+            <el-option label="草稿" value="2"></el-option>
+            <el-option label="发布" value="1"></el-option>
+          </el-select>
+        </el-form-item>
       </div>
       <el-form-item style="flex: 1">
         <v-md-editor
@@ -84,7 +101,8 @@ const blogForm = reactive({
   title: '',
   content: 'text content',
   categoryId: 1,
-  tags: [] as number[]
+  tags: [] as number[],
+  state:"1",
 })
 
 const rules = reactive(
@@ -170,6 +188,7 @@ onMounted(async () => {
         blogForm.tags = res.data.tagId.split(",").map(Number)
 
       }
+      blogForm.state = res.data.state.toString()
     }
   }
   const cresp = await getCategoryList();
@@ -192,5 +211,6 @@ onMounted(async () => {
 .form-inline{
   display: flex;
   flex-direction: row;
+  flex-flow: wrap;
 }
 </style>

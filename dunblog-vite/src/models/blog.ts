@@ -10,6 +10,7 @@ export interface BlogProfile {
     tagId:string;
     tagName:string;
     tagNameList:object;
+    state:number;
 }
 
 export interface BlogProfiles{

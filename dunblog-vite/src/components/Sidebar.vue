@@ -1,6 +1,6 @@
 <template>
   <div class="post-expand side" v-if="isActive">
-    <div class="post-block" style="height: 200px">
+    <div class="post-block">
       <div
           v-for="anchor in titles"
           :style="{ padding: `10px 0 10px ${anchor.indent * 20}px` }"
@@ -27,6 +27,7 @@ const router = useRouter()
 const initializationTitle = (titleData:any) => {
   titles.value = titleData
   isActive.value = true
+  console.log(titles.value)
 }
 
 const initializationPreview = (previewData:any) => {
@@ -48,7 +49,7 @@ function handleAnchorClick(anchor: any) {
 
 const handleScroll = () => {
   let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop; //滚动高度
-  let side = document.querySelector('.side')
+  let side = document.querySelector('.side') as HTMLElement
 
   if (scrollHeight > 285){
     side.style.position = 'fixed'
