@@ -1,5 +1,5 @@
 <template>
-  <div class="post-expand side" v-if="isActive">
+  <div class="post-expand side" v-show="isActive">
     <div class="post-block">
       <div
           v-for="anchor in titles"
@@ -48,18 +48,21 @@ function handleAnchorClick(anchor: any) {
 
 
 const handleScroll = () => {
-  let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop; //滚动高度
-  let side = document.querySelector('.side') as HTMLElement
+  if (isActive){
+    let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop; //滚动高度
+    let side = document.querySelector('.side') as HTMLElement
 
-  if (scrollHeight > 285){
-    side.style.position = 'fixed'
-    side.style.top = '0px'
+    if (scrollHeight > 285){
+      side.style.position = 'fixed'
+      side.style.top = '0px'
 
-  }else {
-    side.style.position = 'static'
+    }else {
+      side.style.position = 'static'
 
-
+    }
   }
+
+
 }
 
 

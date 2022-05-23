@@ -1,7 +1,7 @@
 <template>
   <section id="posts" class="post-expand">
     <article class="post">
-      <div class="post-block">
+      <div class="post-block main-block">
         <header class="post-header">
           <h1 class="post-title">
             <span class="post-title-link">{{blog.title}}</span>
@@ -50,6 +50,9 @@
 
         </div>
       </div>
+      <div class="post-block comment-block">
+        <Comment></Comment>
+      </div>
     </article>
   </section>
 
@@ -63,6 +66,8 @@ import {BlogProfile} from "@/models/blog";
 import moment from "moment";
 import {Pages} from "@/router/pages";
 import bus from '@/lib/bus'
+import Comment from '@/components/Comment.vue'
+
 
 
 const route = useRoute()
@@ -116,7 +121,6 @@ body {
   color: white;
 }
 .post-block {
-  min-height: 660px;
   min-width: 200px;
 }
 .category-router {
@@ -134,5 +138,11 @@ body {
 .post-body {
   margin-top: 30px;
 }
-
+.main-block {
+  min-height: 660px;
+}
+.comment-block {
+  display: flex;
+  flex-direction: column;
+}
 </style>
