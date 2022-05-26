@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="post-block comment-block">
-        <Comment></Comment>
+        <Comment :blogId="Number.parseInt(blogId)"></Comment>
       </div>
     </article>
   </section>

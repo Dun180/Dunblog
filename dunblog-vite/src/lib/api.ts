@@ -9,7 +9,7 @@ import {DiaryInfo} from "@/models/diary";
 
 //#region login
 //登录
-export async function login(form:any){
+export async function login(form: any){
     return new Promise<Response>(async (resolve, reject) => {
         await axios.post("/login", form)
             .then((res) => {
@@ -22,7 +22,7 @@ export async function login(form:any){
 }
 
 //检查token
-export async function checkToken(token:any){
+export async function checkToken(token: any){
     return await http.get<Result<{ checkResult:boolean }>>('/checkToken', null,{token:token})
 }
 
@@ -30,27 +30,27 @@ export async function checkToken(token:any){
 
 //#region blog
 //获取博客列表
-export async function getBlogList(currentPage:number,pageSize:number){
+export async function getBlogList(currentPage: number,pageSize: number){
     return await http.get<Result<BlogProfiles>>('/blog/list',{currentPage:currentPage,pageSize:pageSize})
 }
 
 //获取博客详细信息
-export async function getBlogDetailById(blogId:number){
+export async function getBlogDetailById(blogId: number){
     return await http.get<Result<BlogProfile>>("/blog/get",{blogId:blogId})
 }
 
 //删除博客
-export async function deleteBlog(data:any){
+export async function deleteBlog(data: any){
     return await http.post<Result<Object>>("/blog/delete",data)
 }
 
 //上传图片
-export async function uploadImg(param:any,config:any){
+export async function uploadImg(param: any,config: any){
     return await http.post<Result<Object>>("/upload",param,config)
 }
 
 //博客编辑
-export async function blogEdit(form:any){
+export async function blogEdit(form: any){
     return await http.post<Result<Object>>("/blog/edit",form)
 }
 //#endregion
@@ -62,28 +62,28 @@ export async function getCategoryList(){
 }
 
 //通过id获取分类信息
-export async function getCategoryInfoById(id:number){
+export async function getCategoryInfoById(id: number){
     return await http.get<Result<CategoryInfo>>("/category/get",{categoryId:id})
 }
 
 //分类编辑
-export async function editCategory(data:any){
+export async function editCategory(data: any){
     return await http.post<Result<Object>>("/category/edit",data)
 }
 
 //删除分类
-export async function deleteCategory(data:any){
+export async function deleteCategory(data: any){
     return await http.post<Result<Object>>("/category/delete",data)
 }
 
 //添加分类
-export async function addCategory(data:any){
+export async function addCategory(data: any){
     return await http.post<Result<Object>>("/category/add",data)
 }
 
 
 //根据分类id获取博客列表
-export async function getBlogListByCategoryId(categoryId:number, currentPage:number, pageSize:number) {
+export async function getBlogListByCategoryId(categoryId: number, currentPage: number, pageSize: number) {
     return await http.get<Result<BlogProfiles>>('/category/'+categoryId+'/blogs', {
         currentPage: currentPage,
         pageSize: pageSize
@@ -100,22 +100,22 @@ export async function getTagList(){
 }
 
 //标签编辑
-export async function editTag(data:any){
+export async function editTag(data: any){
     return await http.post<Result<Object>>("/tag/edit",data)
 }
 
 //删除标签
-export async function deleteTag(data:any){
+export async function deleteTag(data: any){
     return await http.post<Result<Object>>("/tag/delete",data)
 }
 
 //添加标签
-export async function addTag(data:any){
+export async function addTag(data: any){
     return await http.post<Result<Object>>("/tag/add",data)
 }
 
 //关联博客和标签
-export async function relBlogAndTag(blogId:number, tags:number[]){
+export async function relBlogAndTag(blogId: number, tags: number[]){
     return await http.post<Result<Object>>("/tag/rel",{blogId:blogId,tags:tags})
 }
 //#endregion
@@ -128,23 +128,35 @@ export async function getDiaryList(){
 }
 
 //获取日记
-export async function getDiary(diaryId:number){
+export async function getDiary(diaryId: number){
     return await http.get<Result<DiaryInfo>>("/diary/get", {diaryId:diaryId})
 }
 
 //日记编辑
-export async function editDiary(data:any){
+export async function editDiary(data: any){
     return await http.post<Result<Object>>("/diary/edit",data)
 }
 
 //删除日记
-export async function deleteDiary(data:any){
+export async function deleteDiary(data: any){
     return await http.post<Result<Object>>("/diary/delete",data)
 }
 
 //添加日记
-export async function addDiary(data:any){
+export async function addDiary(data: any){
     return await http.post<Result<Object>>("/diary/add",data)
 }
 //#endregion
 
+//#region comment
+
+//根据博客id获取评论列表
+export async function getCommentListByBlogId(blogId: number){
+    return await http.get<Result<Object>>("/comment/list",{blogId:blogId})
+}
+
+//添加评论
+export async function addComment(comment: object){
+    return await http.get<Result<Object>>("/comment/add",comment)
+}
+//#endregion
