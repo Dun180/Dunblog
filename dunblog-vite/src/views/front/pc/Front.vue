@@ -6,7 +6,7 @@
       <div class="main-inner">
         <div class="content-wrap">
           <div class="content">
-            <RouterView/>
+            <RouterView v-if="isRouterAlive"/>
           </div>
         </div>
         <aside class="sidebar">
@@ -22,9 +22,16 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import Sidebar from '@/components/Sidebar.vue'
+const isRouterAlive = ref(true);
 
 import {nextTick, provide, ref} from "vue";
-
+const frontReload = () => {
+  isRouterAlive.value = false
+  nextTick(function () {
+    isRouterAlive.value = true
+  })
+}
+provide("frontReload",frontReload)
 
 setTimeout(() => {
   window.L2Dwidget.init({

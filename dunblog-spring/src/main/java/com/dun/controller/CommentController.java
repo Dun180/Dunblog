@@ -19,6 +19,8 @@ public class CommentController {
     @PostMapping("/add")
     public Result addComment(@RequestBody Comment comment){
         try {
+            comment.setState(0);
+
             return Result.succ(commentService.save(comment));
         }catch (Exception e){
             return Result.fail(e.getMessage());
@@ -41,12 +43,11 @@ public class CommentController {
 
     @GetMapping("/list")
     public Result getCommentListByBlogId(@RequestParam(value = "blogId") Integer blogId){
-//        try{
-//            return Result.succ(commentService.getCommentListByBlogId(blogId));
-//        }catch (Exception e){
-//            return Result.fail(e.getMessage());
-//        }
-                    return Result.succ(commentService.getCommentListByBlogId(blogId));
+        try{
+            return Result.succ(commentService.getCommentListByBlogId(blogId));
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
 
     }
 }

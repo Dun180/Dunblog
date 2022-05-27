@@ -157,7 +157,7 @@ export async function getCommentListByBlogId(blogId: number){
 }
 
 //添加评论
-export async function addComment(comment: object){
-    return await http.get<Result<CommentInfo>>("/comment/add",comment)
+export async function addComment(comment: CommentInfo){
+    return await http.post<Result<CommentInfo>>("/comment/add",comment)
 }
 //#endregion

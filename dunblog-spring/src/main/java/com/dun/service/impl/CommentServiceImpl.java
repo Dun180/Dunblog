@@ -22,22 +22,24 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public List<Comment> getCommentListByBlogId(Integer blogId) {
+
         List<Comment> allComments = commentMapper.selectList(new QueryWrapper<Comment>().eq("blog_id",blogId));
         Map<Integer, Comment> map = new HashMap<>();
         List<Comment> result = new ArrayList<>();
         for (Comment comment : allComments) {
+            comment.setInputActive(false);
             if (comment.getParentId() == null) {
                 result.add(comment);
+                map.put(comment.getId(), comment);
             }
-            map.put(comment.getId(), comment);
         }
         for (Comment comment : allComments) {
-            if (comment.getParentId() != null) {
-                Comment parent = map.get(comment.getParentId());
-                if (parent.getChild() == null) {
-                    parent.setChild(new ArrayList<>());
+            if (comment.getRootId() != null) {
+                Comment root = map.get(comment.getRootId());
+                if (root.getChild() == null) {
+                    root.setChild(new ArrayList<>());
                 }
-                parent.getChild().add(comment);
+                root.getChild().add(comment);
             }
         }
         return result;

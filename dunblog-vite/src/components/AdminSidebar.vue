@@ -60,7 +60,21 @@
         </el-menu>
 
       </div>
-      <div class="user-wrapper"></div>
+      <div class="user-wrapper">
+        <el-menu
+            default-active="1"
+            class="menu"
+            background-color="#f0f2f7"
+        >
+          <router-link :to="{name:Pages.BlogList}">
+            <el-menu-item index="1" >
+              <span>Home</span>
+            </el-menu-item>
+          </router-link>
+
+        </el-menu>
+
+      </div>
     </div>
   </div>
 </div>
@@ -84,6 +98,12 @@ import {Pages} from "@/router/pages";
 }
 .admin-sidebar-container{
   height: 100%;
+
+}
+.admin-sidebar-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .logo-wrapper {
   border-bottom: 1px solid #E5E9F2;
@@ -116,5 +136,9 @@ import {Pages} from "@/router/pages";
 }
 .menu-wrapper{
   padding: 0 0 0 10px;
+}
+.user-wrapper{
+  padding: 0 0 0 10px;
+  margin-top: auto;
 }
 </style>

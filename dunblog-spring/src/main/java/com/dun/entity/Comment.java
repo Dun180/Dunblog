@@ -13,6 +13,7 @@ import java.util.List;
 @Accessors(chain = true)
 @TableName("comment")
 public class Comment {
+
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
@@ -24,9 +25,6 @@ public class Comment {
 //    根评论id
     private Integer rootId;
 
-//    评论类型：1 一级评论 2 二级评论 3 三级评论
-    private Integer type;
-
 //    评论状态：0 待审核 1 审核成功 2 审核失败
     private Integer state;
 
@@ -36,11 +34,13 @@ public class Comment {
 //    评论内容
     private String content;
 
-
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
-
     @TableField(exist = false)
     private List<Comment> child;
+
+    @TableField(exist = false)
+    private Boolean inputActive;
 }
+

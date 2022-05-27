@@ -1,6 +1,6 @@
 <template>
   <div class="comment-container">
-    <div class="comment-input">
+    <div class="comment-input" v-show="inputActive">
       <el-input
           v-model="comment.content"
           :rows="3"
@@ -27,29 +27,34 @@
           </div>
         </el-popover>
 
-        <el-button class="button" type="default" @click="onSubmit">提交评论</el-button>
+        <el-button class="button" type="default" @click="onSubmit(null)">提交评论</el-button>
       </div>
     </div>
 
     <div class="comment-list">
-      <div class="comment-item">
+      <div class="comment-item"
+          v-for="(root, index) in commentList"
+          :key="index"
+      >
         <div class="comment-wrapper">
           <el-avatar class="comment-avatar" :size="50" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
           <div class="comment-content">
             <div class="content-top">
               <div class="comment-info">
-                <div class="name">路人甲</div>
-                <div class="date">2022</div>
+                <div class="name">{{root.commentatorName}}</div>
+                <div class="date">
+                  {{ moment(root.createTime).format('YYYY-MM-DD') }}
+                </div>
               </div>
-              <div class="comment-reply">
+              <div class="comment-reply" @click="handleReply(root)">
                 <i class="iconfont icon-icon_reply"></i>
               </div>
             </div>
             <div class="content-bottom">
-              hello world
+              {{ root.content }}
             </div>
 
-            <div class="comment-input">
+            <div class="comment-input" v-show="root.inputActive">
               <el-input
                   v-model="comment.content"
                   :rows="3"
@@ -74,51 +79,72 @@
                     </div>
                   </div>
                 </el-popover>
-
-                <el-button class="button" type="default" @click="onSubmit">回复</el-button>
+                <div class="button">
+                  <el-link class="link" type="primary" @click="handleCencelReply()">取消回复</el-link>
+                  <el-button type="default" @click="onSubmit(root)">回复</el-button>
+                </div>
               </div>
             </div>
 
           </div>
         </div>
-      </div>
-      <div class="comment-item sub-list">
-        <div class="comment-wrapper">
-          <el-avatar class="comment-avatar" :size="50" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
-          <div class="comment-content">
-            <div class="content-top">
-              <div class="comment-info">
-                <div class="name">路人甲</div>
-                <div class="date">2022</div>
+        <div class="comment-item sub-list"
+            v-for="(item, index) in root.child"
+            :key="index"
+        >
+          <div class="comment-wrapper">
+            <el-avatar class="comment-avatar" :size="50" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
+            <div class="comment-content">
+              <div class="content-top">
+                <div class="comment-info">
+                  <div class="name">{{item.commentatorName}}</div>
+                  <div class="date">
+                    {{ moment(item.createTime).format('YYYY-MM-DD') }}
+                  </div>
+                </div>
+                <div class="comment-reply" @click="handleReply(item)">
+                  <i class="iconfont icon-icon_reply"></i>
+                </div>
               </div>
-              <div class="comment-reply">
-                <i class="iconfont icon-icon_reply"></i>
+              <div class="content-bottom">
+                {{ item.content }}
               </div>
-            </div>
-            <div class="content-bottom">
-              hello world
+              <div class="comment-input" v-show="item.inputActive">
+                <el-input
+                    v-model="comment.content"
+                    :rows="3"
+                    type="textarea"
+                    placeholder="说点什么吧"
+                />
+                <div class="submit-area">
+                  <el-popover placement="top" :width="200" trigger="click" popper-class="popover-wrap">
+                    <template #reference>
+                      <el-button plain>
+                        <i class="iconfont icon-yonghu-xianxing" style="margin-right: 0.5em"></i>
+                        {{ comment.commentatorName || "昵称" }}
+                      </el-button>
+                    </template>
+                    <div class="popover">
+                      <div class="title">
+                        访客信息
+                      </div>
+                      <div class="content">
+                        <i class="iconfont icon-yonghu-xianxing"></i>
+                        <el-input v-model="comment.commentatorName" placeholder="昵称" />
+                      </div>
+                    </div>
+                  </el-popover>
+                  <div class="button">
+                    <el-link class="link" type="primary" @click="handleCencelReply()">取消回复</el-link>
+                    <el-button type="default" @click="onSubmit(root)">回复</el-button>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-      </div>
-      <div class="comment-item">
-        <div class="comment-wrapper">
-          <el-avatar class="comment-avatar" :size="50" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
-          <div class="comment-content">
-            <div class="content-top">
-              <div class="comment-info">
-                <div class="name">路人甲</div>
-                <div class="date">2022</div>
-              </div>
-              <div class="comment-reply">
-                <i class="iconfont icon-icon_reply"></i>
-              </div>
-            </div>
-            <div class="content-bottom">
-              hello world
-            </div>
-          </div>
-        </div>
+
       </div>
 
     </div>
@@ -126,25 +152,27 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {inject, onMounted, ref} from "vue";
 import {ElMessage} from "element-plus";
-import {getCommentListByBlogId} from "@/lib/api";
+import moment from "moment";
+import {addComment, getCommentListByBlogId} from "@/lib/api";
 import {CommentInfo} from "@/models/comment";
+
+const reload = inject("frontReload", Function)
+
 const props = defineProps({
   blogId: Number
 })
-const comment = ref({
+const comment = ref<CommentInfo>({
   commentatorName:'',
   content:'',
-  blogId:0
 })
-
+const inputActive = ref(true)
+const lastInputItem = ref<CommentInfo|null>(null)
 const commentList = ref([] as CommentInfo[])
 
-const onSubmit = () => {
-  if (props.blogId) {
-    comment.value.blogId = props.blogId
-  }
+const onSubmit = async (root: CommentInfo|null) => {
+  //对评论内容进行校验
   if (!comment.value.content){
     ElMessage({
       message: '请填写评论内容',
@@ -152,9 +180,55 @@ const onSubmit = () => {
     })
     return
   }
-  if(!comment.value.constructor){
+  if(!comment.value.commentatorName){
     comment.value.commentatorName = '匿名游客'
   }
+  if (props.blogId) { //设置博客id
+    comment.value.blogId = props.blogId
+  }
+  if (root) {  //如果不是根评论，设置根评论id
+    comment.value.rootId = root.id
+  }
+  if (lastInputItem.value) {  //如果是回复评论，设置父评论id
+    comment.value.parentId = lastInputItem.value.id
+    comment.value.content = '回复 '+lastInputItem.value.commentatorName + ' :' + comment.value.content
+  }
+
+
+  const resp = await addComment(comment.value)
+  if (resp.code == 200) {
+    reload()
+    handleCencelReply()
+    ElMessage({
+      message: '评论成功',
+      type: 'success',
+    })
+  }else {
+    ElMessage({
+      message: '评论失败',
+      type: 'error',
+    })
+  }
+
+}
+
+const handleReply = (item: CommentInfo) => {
+  if (lastInputItem.value?.inputActive){
+    lastInputItem.value.inputActive = false
+  }
+  item.inputActive = true;
+  if (inputActive.value) {
+    inputActive.value = false;
+  }
+  lastInputItem.value = item;
+}
+
+const handleCencelReply = () => {
+  if (lastInputItem.value?.inputActive){
+    lastInputItem.value.inputActive = false
+  }
+  inputActive.value = true;
+  lastInputItem.value = null;
 
 }
 onMounted(async () => {
@@ -181,7 +255,11 @@ onMounted(async () => {
   }
   .button {
     margin-left: auto;
+    .link {
+      margin-right: 1em;
+    }
   }
+
 }
 .comment-list {
   color: #758397;
