@@ -5,6 +5,7 @@ import {Response, Result} from "@/models/result";
 import {CategoryInfo} from "@/models/category";
 import {TagInfo} from "@/models/tag";
 import {DiaryInfo} from "@/models/diary";
+import {CommentInfo} from "@/models/comment";
 
 
 //#region login
@@ -152,11 +153,11 @@ export async function addDiary(data: any){
 
 //根据博客id获取评论列表
 export async function getCommentListByBlogId(blogId: number){
-    return await http.get<Result<Object>>("/comment/list",{blogId:blogId})
+    return await http.get<Result<CommentInfo[]>>("/comment/list",{blogId:blogId})
 }
 
 //添加评论
 export async function addComment(comment: object){
-    return await http.get<Result<Object>>("/comment/add",comment)
+    return await http.get<Result<CommentInfo>>("/comment/add",comment)
 }
 //#endregion

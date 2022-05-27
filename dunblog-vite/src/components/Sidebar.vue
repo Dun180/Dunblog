@@ -27,7 +27,6 @@ const router = useRouter()
 const initializationTitle = (titleData:any) => {
   titles.value = titleData
   isActive.value = true
-  console.log(titles.value)
 }
 
 const initializationPreview = (previewData:any) => {
@@ -67,8 +66,6 @@ const handleScroll = () => {
 
 
 watchEffect(() => {
-  console.log("currentRoute:"+router.currentRoute.value)
-  console.log(router.currentRoute.value.name)
   if (router.currentRoute.value.name != "BlogDetail"){
     isActive.value = false;
     titles.value = null;

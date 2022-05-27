@@ -75,7 +75,7 @@
                   </div>
                 </el-popover>
 
-                <el-button class="button" type="default" @click="onSubmit">提交评论</el-button>
+                <el-button class="button" type="default" @click="onSubmit">回复</el-button>
               </div>
             </div>
 
@@ -125,18 +125,26 @@
   </div>
 </template>
 
-<script setup>
-
+<script setup lang="ts">
+import {onMounted, ref} from "vue";
 import {ElMessage} from "element-plus";
+import {getCommentListByBlogId} from "@/lib/api";
+import {CommentInfo} from "@/models/comment";
 const props = defineProps({
   blogId: Number
 })
 const comment = ref({
   commentatorName:'',
   content:'',
+  blogId:0
 })
+
+const commentList = ref([] as CommentInfo[])
+
 const onSubmit = () => {
-  comment.value.blogId = props.blogId
+  if (props.blogId) {
+    comment.value.blogId = props.blogId
+  }
   if (!comment.value.content){
     ElMessage({
       message: '请填写评论内容',
@@ -149,8 +157,13 @@ const onSubmit = () => {
   }
 
 }
-onMounted(() => {
-
+onMounted(async () => {
+  if (props.blogId) {
+    const resp = await getCommentListByBlogId(props.blogId);
+    if (resp.code == 200){
+      commentList.value = resp.data
+    }
+  }
 })
 </script>
 

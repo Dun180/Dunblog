@@ -1,6 +1,7 @@
 package com.dun.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dun.common.lang.Result;
 import com.dun.entity.Comment;
 import com.dun.service.CommentService;
@@ -40,10 +41,12 @@ public class CommentController {
 
     @GetMapping("/list")
     public Result getCommentListByBlogId(@RequestParam(value = "blogId") Integer blogId){
-        try{
-            return Result.succ(commentService.getCommentListByBlogId(blogId));
-        }catch (Exception e){
-            return Result.fail(e.getMessage());
-        }
+//        try{
+//            return Result.succ(commentService.getCommentListByBlogId(blogId));
+//        }catch (Exception e){
+//            return Result.fail(e.getMessage());
+//        }
+                    return Result.succ(commentService.getCommentListByBlogId(blogId));
+
     }
 }

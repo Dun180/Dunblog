@@ -89,11 +89,9 @@ onMounted(async () => {
       }
     }
   }
-  console.log(preview.value)
 })
 
 onUpdated(() => {
-  console.log(preview.value?.$el.querySelectorAll('h1,h2,h3,h4,h5,h6'))
   const anchors = preview.value?.$el.querySelectorAll('h1,h2,h3,h4,h5,h6')
   titles.value = Array.from(anchors).filter((title:any) => !!title.innerText.trim())
   if (!titles.value.length) {
