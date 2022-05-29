@@ -1,13 +1,18 @@
 package com.dun.controller;
 
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dun.common.lang.Result;
 import com.dun.entity.Comment;
 import com.dun.service.CommentService;
+import com.dun.util.DunUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/comment")
@@ -49,5 +54,25 @@ public class CommentController {
             return Result.fail(e.getMessage());
         }
 
+    }
+
+    @PostMapping("/query")
+    public Result queryComment(@RequestBody Comment comment){
+        try {
+            Map<String, Object> map = new HashMap<>();
+            map.put("root_id",comment.getRootId());
+            map.put("create_time",comment.getCreateTime());
+            map.put("commentator_name",comment.getCommentatorName());
+            map.put("state",comment.getState());
+            map.put("blog_id",comment.getBlogId());
+            map.put("parent_id",comment.getParentId());
+            map.put("content",comment.getContent());
+            List<Comment> list = commentService.list(new QueryWrapper<Comment>().allEq(map,false));
+
+            return Result.succ(list);
+
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
     }
 }

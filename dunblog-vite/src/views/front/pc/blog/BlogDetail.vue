@@ -60,7 +60,7 @@
 
 <script setup lang="ts">
 import {useRoute} from "vue-router";
-import {onMounted, onUpdated, reactive, ref, watchEffect} from "vue";
+import {onMounted, onUpdated, ref} from "vue";
 import {getBlogDetailById} from "@/lib/api";
 import {BlogProfile} from "@/models/blog";
 import moment from "moment";

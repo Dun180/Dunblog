@@ -40,7 +40,8 @@ import girlURL from '@/assets/img/girl.png'
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive({
   account: 'dun',
-  password: '111'
+  // password: '111'
+  password: ''
 })
 const store = useStore()
 const router = useRouter()

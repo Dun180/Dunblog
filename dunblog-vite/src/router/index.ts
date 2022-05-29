@@ -86,6 +86,11 @@ const routes: Array<RouteRecordRaw> = [
                 name: Pages.DiaryEdit_Admin,
                 component: () => import("@/views/admin/pc/diary/DiaryEdit.vue"),
             },
+            {
+                path: 'comment/list',
+                name: Pages.CommentList_Admin,
+                component: () => import("@/views/admin/pc/comment/CommentList.vue"),
+            },
         ],
         meta: {
             requireAuth: true
