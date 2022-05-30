@@ -77,7 +77,7 @@ import Comment from '@/components/Comment.vue'
 const route = useRoute()
 
 const preview = ref(null)
-const like = ref<HTMLElement>(null)
+const like = ref<HTMLElement|null>(null)
 
 const blogId = ref(route.params.blogId)
 const blog = ref({} as BlogProfile)
@@ -87,7 +87,9 @@ const handleLike = async () => {
   const res = await likeBlog(Number(blogId.value))
   console.log(res)
   if (res.code == 200) {
-    like.value.style.color = '#00AEEC';
+    if (like.value!=null){
+      like.value.style.color = '#00AEEC';
+    }
   }
 }
 

@@ -30,7 +30,8 @@ import Prism from 'prismjs';
 // highlight code
 import 'prismjs/components/prism-json';
 
-
+//热力图组件
+import VueCalendarHeatmap from 'vue3-calendar-heatmap'
 
 VMdPreview.use(githubTheme, {
     Hljs: hljs,
@@ -43,6 +44,7 @@ app
     .use(VueAxios,axios)
     .use(VMdEditor)
     .use(VMdPreview)
+    .use(VueCalendarHeatmap)
     .mount('#app')
 
 
