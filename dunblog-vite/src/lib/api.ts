@@ -54,6 +54,11 @@ export async function uploadImg(param: any,config: any){
 export async function blogEdit(form: any){
     return await http.post<Result<Object>>("/blog/edit",form)
 }
+
+//点赞
+export async function likeBlog(blogId: number){
+    return await http.get<Result<Object>>("/blog/like",{blogId:blogId})
+}
 //#endregion
 
 //#region category
@@ -174,5 +179,6 @@ export async function queryComment(data: Object){
 export async function reviewComment(data: Object){
     return await http.post<Result<CommentInfo[]>>("/comment/review",data)
 }
+
 
 //#endregion

@@ -2,6 +2,7 @@
   <div class="post-expand side" v-show="isActive">
     <div class="post-block">
       <div
+          class="title"
           v-for="anchor in titles"
           :style="{ padding: `10px 0 10px ${anchor.indent * 20}px` }"
           @click="handleAnchorClick(anchor)"
@@ -51,7 +52,7 @@ const handleScroll = () => {
     let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop; //滚动高度
     let side = document.querySelector('.side') as HTMLElement
 
-    if (scrollHeight > 285){
+    if (scrollHeight > 341){
       side.style.position = 'fixed'
       side.style.top = '0px'
 
@@ -97,5 +98,9 @@ onBeforeUnmount( () => {
 <style scoped>
 .side{
   width: 240px;
+}
+.title {
+  display: flex;
+  justify-content: flex-start;
 }
 </style>

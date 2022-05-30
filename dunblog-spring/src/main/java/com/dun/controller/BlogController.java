@@ -1,12 +1,12 @@
 package com.dun.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dun.common.lang.Result;
 import com.dun.entity.Blog;
 import com.dun.service.BlogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -106,5 +106,12 @@ public class BlogController {
         }
     }
 
-
+    @GetMapping("/like")
+    public Result likeBlog(@RequestParam(value = "blogId") Integer blogId){
+        try {
+            return Result.succ(blogService.update(new UpdateWrapper<Blog>().eq("id",blogId).setSql("`like` = `like` + 1")));
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+    }
 }

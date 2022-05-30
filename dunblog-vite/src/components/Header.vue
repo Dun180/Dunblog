@@ -21,17 +21,26 @@
       >
         <router-link :to="{name:Pages.BlogList}">
           <el-menu-item index="1">
-            <span>Home</span>
+            <i class="iconfont icon-rcd-home"></i>
+            <span>&nbsp;&nbsp;Home</span>
           </el-menu-item>
         </router-link>
         <router-link :to="{name:Pages.CategoryList}">
           <el-menu-item index="2">
-            <span>Categories</span>
+            <i class="iconfont icon-rcd-list"></i>
+            <span>&nbsp;&nbsp;Categories</span>
           </el-menu-item>
         </router-link>
         <router-link :to="{name:Pages.Archives}">
           <el-menu-item index="3" ref="pos">
-            <span>Archives</span>
+            <i class="iconfont icon-rcd-reconciliation"></i>
+            <span>&nbsp;&nbsp;Archives</span>
+          </el-menu-item>
+        </router-link>
+        <router-link :to="{name:Pages.Archives}">
+          <el-menu-item index="3" ref="pos">
+            <i class="iconfont icon-rcd-search"></i>
+            <span>&nbsp;&nbsp;Search</span>
           </el-menu-item>
         </router-link>
       </el-menu>

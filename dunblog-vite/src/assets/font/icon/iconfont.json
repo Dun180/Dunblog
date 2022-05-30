@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2742629",
+      "name": "点赞",
+      "font_class": "dianzan",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "29923357",
+      "name": "rcd-home",
+      "font_class": "rcd-home",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "29923371",
+      "name": "rcd-list",
+      "font_class": "rcd-list",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "29923372",
+      "name": "rcd-reconciliation",
+      "font_class": "rcd-reconciliation",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "29923375",
+      "name": "rcd-search",
+      "font_class": "rcd-search",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
       "icon_id": "1727458",
       "name": "224用户-线性",
       "font_class": "yonghu-xianxing",

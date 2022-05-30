@@ -55,7 +55,7 @@ setTimeout(() => {
 .sidebar{
   position: static;
   float: left;
-  margin-top: 285px;
+  margin-top: 341px;
 }
 
 </style>

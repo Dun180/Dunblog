@@ -49,6 +49,10 @@
           <v-md-preview :text="blog.content" ref="preview"></v-md-preview>
 
         </div>
+        <div class="post-bottom">
+          <i @click="handleLike()" class="iconfont icon-dianzan" ref="like"></i>
+
+        </div>
       </div>
       <div class="post-block comment-block">
         <Comment :blogId="Number.parseInt(blogId)"></Comment>
@@ -61,7 +65,7 @@
 <script setup lang="ts">
 import {useRoute} from "vue-router";
 import {onMounted, onUpdated, ref} from "vue";
-import {getBlogDetailById} from "@/lib/api";
+import {getBlogDetailById, likeBlog} from "@/lib/api";
 import {BlogProfile} from "@/models/blog";
 import moment from "moment";
 import {Pages} from "@/router/pages";
@@ -73,11 +77,19 @@ import Comment from '@/components/Comment.vue'
 const route = useRoute()
 
 const preview = ref(null)
+const like = ref<HTMLElement>(null)
 
 const blogId = ref(route.params.blogId)
 const blog = ref({} as BlogProfile)
 const titles = ref()
 
+const handleLike = async () => {
+  const res = await likeBlog(Number(blogId.value))
+  console.log(res)
+  if (res.code == 200) {
+    like.value.style.color = '#00AEEC';
+  }
+}
 
 onMounted(async () => {
   if(blogId.value){
@@ -136,8 +148,24 @@ body {
 .post-body {
   margin-top: 30px;
 }
+
 .main-block {
   min-height: 660px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.post-bottom {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  .iconfont {
+    font-size: 25px;
+    cursor: pointer;
+    &:hover {
+      color: #00AEEC;
+    }
+  }
 }
 .comment-block {
   display: flex;
