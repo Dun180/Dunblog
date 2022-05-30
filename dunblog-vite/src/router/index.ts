@@ -91,6 +91,11 @@ const routes: Array<RouteRecordRaw> = [
                 name: Pages.CommentList_Admin,
                 component: () => import("@/views/admin/pc/comment/CommentList.vue"),
             },
+            {
+                path: 'comment/moderation',
+                name: Pages.CommentModeration_Admin,
+                component: () => import("@/views/admin/pc/comment/CommentModeration.vue"),
+            },
         ],
         meta: {
             requireAuth: true

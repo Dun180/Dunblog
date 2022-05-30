@@ -150,7 +150,10 @@ export async function addDiary(data: any){
 //#endregion
 
 //#region comment
-
+//根据博客id获取评论列表
+export async function getCommentListByBlogId(blogId: number){
+    return await http.get<Result<CommentInfo[]>>("/comment/list",{blogId:blogId})
+}
 
 //添加评论
 export async function addComment(comment: CommentInfo){
@@ -164,7 +167,12 @@ export async function deleteComment(data: any){
 
 //查询
 export async function queryComment(data: Object){
-    console.log(data)
     return await http.post<Result<CommentInfo[]>>("/comment/query",data)
 }
+
+//审核
+export async function reviewComment(data: Object){
+    return await http.post<Result<CommentInfo[]>>("/comment/review",data)
+}
+
 //#endregion

@@ -155,7 +155,7 @@
 import {inject, onMounted, ref} from "vue";
 import {ElMessage} from "element-plus";
 import moment from "moment";
-import {addComment, queryComment} from "@/lib/api";
+import {addComment, getCommentListByBlogId, queryComment} from "@/lib/api";
 import {CommentInfo} from "@/models/comment";
 
 const reload = inject("frontReload", Function)
@@ -233,8 +233,8 @@ const handleCencelReply = () => {
 }
 onMounted(async () => {
   if (props.blogId) {
-    // const resp = await getCommentListByBlogId(props.blogId);
-    const resp = await queryComment({blogId:props.blogId,state:1})
+    const resp = await getCommentListByBlogId(props.blogId);
+    // const resp = await queryComment({blogId:props.blogId,state:1})
 
     if (resp.code == 200){
       commentList.value = resp.data

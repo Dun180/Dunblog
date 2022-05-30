@@ -62,7 +62,7 @@
               <span>评论</span>
 
             </template>
-            <router-link :to="{name:Pages.DiaryList_Admin}">
+            <router-link :to="{name:Pages.CommentModeration_Admin}">
               <el-menu-item index="6-1">审核评论</el-menu-item>
             </router-link>
 
