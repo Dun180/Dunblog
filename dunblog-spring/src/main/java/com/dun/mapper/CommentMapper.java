@@ -11,8 +11,5 @@ import java.util.Map;
 
 @Repository
 public interface CommentMapper extends BaseMapper<Comment> {
-    /**
-     * 根据博客id获取评论列表
-     */
-    List<Comment> getCommentListByBlogId(Integer blogId);
+
 }

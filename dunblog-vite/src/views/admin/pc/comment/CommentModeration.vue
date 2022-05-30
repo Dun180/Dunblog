@@ -1,6 +1,6 @@
 <template>
   <div class="page-title">
-    <span>评论列表</span>
+    <span>评论审核</span>
   </div>
   <div class="page-content">
     <div class="blog-list-container">
@@ -23,19 +23,18 @@
 
           <template #default="scope">
 
-            <el-popconfirm
-                title="Are you sure to delete this?"
-                icon-color="red"
-                @confirm="handleDelete(scope.$index, scope.row)"
+            <el-button
+                size="small"
+                type="primary"
+                @click="handleReview(scope.$index, scope.row, 1)"
+            >通过</el-button
             >
-              <template #reference>
-                <el-button
-                    size="small"
-                    type="danger"
-                >Delete</el-button
-                >
-              </template>
-            </el-popconfirm>
+            <el-button
+                size="small"
+                type="danger"
+                @click="handleReview(scope.$index, scope.row, 2)"
+            >退回</el-button
+            >
 
           </template>
         </el-table-column>
@@ -49,7 +48,7 @@
 <script setup lang="ts">
 import {ElMessage} from "element-plus";
 import {onMounted, ref} from "vue";
-import {deleteComment, queryComment} from "@/lib/api";
+import {deleteComment, queryComment, reviewComment} from "@/lib/api";
 import moment from "moment";
 import { inject } from 'vue'
 import {CommentInfo} from "@/models/comment";
@@ -60,20 +59,22 @@ const commentList = ref([] as CommentInfo[])
 
 
 
-const handleDelete = async (index:any, row:any) => {
+const handleReview = async (index:any, row:any, state: number) => {
   const data = {
-    id:row.id
+    id:row.id,
+    state:state
   }
-  const resp = await deleteComment(data);
+  const resp = await reviewComment(data);
   if (resp.code == 200) {
     reload()
     ElMessage({
-      message: '删除成功',
+      message: '审核成功',
       type: 'success',
     })
   }else {
+    console.log(resp)
     ElMessage({
-      message: '删除失败',
+      message: '审核失败',
       type: 'error',
     })
   }
@@ -82,7 +83,7 @@ const handleDelete = async (index:any, row:any) => {
 }
 
 onMounted(async () => {
-  const resp = await queryComment({});
+  const resp = await queryComment({state:0});
   if (resp.code == 200){
     commentList.value = resp.data;
   }

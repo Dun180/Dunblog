@@ -2,13 +2,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dun.mapper.CommentMapper">
 
-    <!--根据博客id获取标签id-->
-    <select id="getCommentListByBlogId" resultType="Integer">
-        SELECT
-            `comment`.*
-        FROM
-            `comment`
-        WHERE
-            `comment`.blog_id = #{blogId}
-    </select>
+
 </mapper>

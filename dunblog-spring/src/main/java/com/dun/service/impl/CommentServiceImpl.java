@@ -23,7 +23,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Override
     public List<Comment> getCommentListByBlogId(Integer blogId) {
 
-        List<Comment> allComments = commentMapper.selectList(new QueryWrapper<Comment>().eq("blog_id",blogId));
+        List<Comment> allComments = commentMapper.selectList(new QueryWrapper<Comment>().eq("blog_id",blogId).eq("state",1));
         Map<Integer, Comment> map = new HashMap<>();
         List<Comment> result = new ArrayList<>();
         for (Comment comment : allComments) {

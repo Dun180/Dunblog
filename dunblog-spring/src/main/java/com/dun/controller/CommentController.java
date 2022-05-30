@@ -56,6 +56,16 @@ public class CommentController {
 
     }
 
+    @PostMapping("/review")
+    public Result reviewComment(@RequestBody Comment comment){
+        try{
+
+            return Result.succ(commentService.saveOrUpdate(comment));
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+    }
+
     @PostMapping("/query")
     public Result queryComment(@RequestBody Comment comment){
         try {
