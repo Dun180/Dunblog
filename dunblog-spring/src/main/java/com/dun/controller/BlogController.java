@@ -39,13 +39,13 @@ public class BlogController {
     }
 
     @GetMapping("/list")
-    public Result getBlogList(@RequestParam(value = "currentPage") Long currentPage,@RequestParam(value = "pageSize") Long pageSize){
+    public Result getBlogList(@RequestParam(value = "currentPage") Long currentPage,@RequestParam(value = "pageSize") Long pageSize, @RequestParam(value = "state",required = false) Integer state){
 
         try{
             //调整currentPage，防止出错
             if(currentPage == null || currentPage < 1) currentPage = (long)1;
             Page<Map<String, Object>> page = new Page<>(currentPage,pageSize);
-            IPage<Map<String, Object>> iPage = blogService.getBlogList(page);
+            IPage<Map<String, Object>> iPage = blogService.getBlogList(page, state);
             //获取查询结果，进行处理
             List<Map<String, Object>> blogList = iPage.getRecords();
             for(Map<String, Object> map:blogList){

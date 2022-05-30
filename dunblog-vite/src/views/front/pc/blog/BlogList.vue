@@ -85,7 +85,7 @@ const pageTotal=ref(1);
 const currentPage=ref(1);
 
 const page = async (currentPage: number): Promise<void> => {
-  const res = await getBlogList(currentPage, pageSize.value)
+  const res = await getBlogList(currentPage, pageSize.value,1)
   if (res.code == 200) {
     blogList.value = res.data.records
     for (let i = 0; i < blogList.value.length; i++) {

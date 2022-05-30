@@ -20,6 +20,7 @@ public class Blog {
     private String title;
     private String content;
     private Integer categoryId;
+//    状态 0 已删除 1 已发布 2 未发布
     private Integer state;
 
     @TableField(fill = FieldFill.INSERT)

@@ -3,6 +3,7 @@ package com.dun.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.dun.entity.Blog;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface BlogMapper extends BaseMapper<Blog> {
     /**
      * 获取blog信息列表
      */
-    IPage<Map<String,Object>> getBlogList(IPage<Map<String,Object>> page);
+    IPage<Map<String,Object>> getBlogList(IPage<Map<String,Object>> page,Integer state);
 
     /**
      * 根据分类id获取blog信息列表

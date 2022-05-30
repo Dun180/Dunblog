@@ -26,6 +26,11 @@
             tag
             ON
                 blog_tag_rel.tag_id = tag.id
+
+        <if test="null!=state">
+        WHERE
+            blog.state = #{state}
+        </if>
         GROUP BY
             blog.id
         ORDER BY

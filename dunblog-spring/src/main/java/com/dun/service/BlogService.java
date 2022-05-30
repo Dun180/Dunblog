@@ -12,7 +12,7 @@ public interface BlogService extends IService<Blog> {
     /**
      * 获取blog信息列表
      */
-    IPage<Map<String,Object>> getBlogList(IPage<Map<String,Object>> page);
+    IPage<Map<String,Object>> getBlogList(IPage<Map<String,Object>> page, Integer state);
 
 
     /**

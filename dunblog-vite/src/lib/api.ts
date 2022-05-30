@@ -31,8 +31,8 @@ export async function checkToken(token: any){
 
 //#region blog
 //获取博客列表
-export async function getBlogList(currentPage: number,pageSize: number){
-    return await http.get<Result<BlogProfiles>>('/blog/list',{currentPage:currentPage,pageSize:pageSize})
+export async function getBlogList(currentPage: number,pageSize: number,state?:number){
+    return await http.get<Result<BlogProfiles>>('/blog/list',{currentPage:currentPage,pageSize:pageSize,state:state})
 }
 
 //获取博客详细信息
