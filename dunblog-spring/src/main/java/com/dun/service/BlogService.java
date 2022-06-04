@@ -31,4 +31,9 @@ public interface BlogService extends IService<Blog> {
      * 通过ID查询博客标签数据
      */
     List<Map<String,Object>> getBlogTagInfo(Integer id);
+
+    /**
+    * 获取日历热图数据
+    */
+    List<Map<String,Object>> getCalendarHeatmapData() throws Exception;
 }

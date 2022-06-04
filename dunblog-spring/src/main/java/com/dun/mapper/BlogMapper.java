@@ -6,6 +6,7 @@ import com.dun.entity.Blog;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,4 +31,9 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * 通过ID查询博客标签数据
      */
     List<Map<String,Object>> getBlogTagInfo(Integer id);
+
+    /**
+     * 获取日历热图数据
+     */
+    List<Date> getCalendarHeatmapData();
 }

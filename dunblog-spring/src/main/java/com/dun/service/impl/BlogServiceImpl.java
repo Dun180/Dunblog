@@ -1,16 +1,17 @@
 package com.dun.service.impl;
 
+import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dun.entity.Blog;
 import com.dun.mapper.BlogMapper;
 import com.dun.service.BlogService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dun.util.DunUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("blogService")
 public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService {
@@ -37,5 +38,22 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     @Override
     public List<Map<String, Object>> getBlogTagInfo(Integer id) {
         return blogMapper.getBlogTagInfo(id);
+    }
+
+    @Override
+    public List<Map<String, Object>> getCalendarHeatmapData() throws Exception{
+        List<Date> dateList = blogMapper.getCalendarHeatmapData();
+        List<String> stringList = new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+        for (Date date: dateList) {
+            String str = DateUtil.format(date, "yyyy-MM-dd");
+            if (map.containsKey(str)){
+                map.put(str,(Integer)(map.get(str))+1);
+            }else {
+                map.put(str,1);
+            }
+        }
+        List<Map<String, Object>> result = DunUtils.mapToListMap(map, "date", "count");
+        return result;
     }
 }

@@ -86,6 +86,14 @@
             blog.id = #{id}
     </select>
 
+    <!--    获取日历热图数据-->
+    <select id="getCalendarHeatmapData" resultType="java.util.Date">
+        SELECT
+            blog.create_time
+        FROM
+            blog
+    </select>
+
 </mapper>
 
 

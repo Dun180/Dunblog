@@ -59,6 +59,11 @@ export async function blogEdit(form: any){
 export async function likeBlog(blogId: number){
     return await http.get<Result<Object>>("/blog/like",{blogId:blogId})
 }
+
+//获取日历热图数据
+export async function getCalendarHeatmapData() {
+    return await http.get<Result<Object>>("/blog/date")
+}
 //#endregion
 
 //#region category

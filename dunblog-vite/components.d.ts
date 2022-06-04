@@ -9,6 +9,7 @@ declare module 'vue' {
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElHeader: typeof import('element-plus/es')['ElHeader']
@@ -32,6 +33,9 @@ declare module 'vue' {
     Header: typeof import('./src/components/Header.vue')['default']
     MobileSidebar: typeof import('./src/components/MobileSidebar.vue')['default']
     Sidebar: typeof import('./src/components/Sidebar.vue')['default']
+    VanConfigProvider: typeof import('vant/es')['ConfigProvider']
+    VanNavBar: typeof import('vant/es')['NavBar']
+    VanPopup: typeof import('vant/es')['Popup']
   }
 }
 

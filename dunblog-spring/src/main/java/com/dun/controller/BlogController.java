@@ -10,6 +10,7 @@ import com.dun.service.BlogService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -111,6 +112,18 @@ public class BlogController {
         try {
             return Result.succ(blogService.update(new UpdateWrapper<Blog>().eq("id",blogId).setSql("`like` = `like` + 1")));
         }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+    }
+
+    /**
+     * 获取日历热图数据
+     */
+    @GetMapping("/date")
+    public Result getCalendarHeatmapData() {
+        try {
+            return Result.succ(blogService.getCalendarHeatmapData());
+        }catch (Exception e) {
             return Result.fail(e.getMessage());
         }
     }
