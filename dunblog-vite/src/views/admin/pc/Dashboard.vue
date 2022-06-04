@@ -16,10 +16,11 @@
 import {onMounted, ref} from "vue";
 import {getCalendarHeatmapData} from "@/lib/api";
 import moment from "moment";
-
-const timeData = ref<Object>([])
-const currentDate = ref('')
+const timeData = ref<Object>([{ date: "2020-08-02", count: 6 }])
+const currentDate = ref('2021-05-16')
 onMounted(async () => {
+  console.log('---------------------------------------')
+
   currentDate.value = moment(new Date()).format('YYYY-MM-DD')
   console.log(currentDate.value)
   const resp = await getCalendarHeatmapData()
