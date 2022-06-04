@@ -17,4 +17,6 @@ export const Pages = {
     DiaryEdit_Admin:'DiaryEdit_Admin',
     CommentList_Admin:'CommentList_Admin',
     CommentModeration_Admin:'CommentModeration_Admin',
+    ToDoToday_Admin:'ToDoToday_Admin',
+    ToDoGlobal_Admin:'ToDoGlobal_Admin'
 }

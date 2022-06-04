@@ -71,6 +71,20 @@
             </router-link>
 
           </el-sub-menu>
+        <el-sub-menu index="7">
+          <template #title>
+            <span>时间管理</span>
+
+          </template>
+          <router-link :to="{name:Pages.ToDoToday_Admin}">
+            <el-menu-item index="7-1">今日待办</el-menu-item>
+          </router-link>
+
+          <router-link :to="{name:Pages.ToDoGlobal_Admin}">
+            <el-menu-item index="7-2">全局待办</el-menu-item>
+          </router-link>
+
+        </el-sub-menu>
         </el-menu>
 
       </div>

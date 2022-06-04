@@ -96,6 +96,16 @@ const routes: Array<RouteRecordRaw> = [
                 name: Pages.CommentModeration_Admin,
                 component: () => import("@/views/admin/pc/comment/CommentModeration.vue"),
             },
+            {
+                path: 'time/to-do-today',
+                name: Pages.ToDoToday_Admin,
+                component: () => import("@/views/admin/pc/time-management/ToDoToday.vue"),
+            },
+            {
+                path: 'time/to-do-global',
+                name: Pages.ToDoGlobal_Admin,
+                component: () => import("@/views/admin/pc/time-management/ToDoGlobal.vue"),
+            },
         ],
         meta: {
             requireAuth: true
@@ -122,10 +132,8 @@ const router = createRouter({
 // 路由判断登录 根据路由配置文件的参数
 router.beforeEach((to, from, next) => {
     const store = useStore()
-    console.log("start beforeEach")
     if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
         const token = localStorage.getItem("token")
-        console.log("------------" + token)
         if (token) { // 判断当前的token是否存在 ； 登录存入的token
             if (to.path === '/login') {
                 store.REMOVE_INFO()
@@ -135,7 +143,6 @@ router.beforeEach((to, from, next) => {
                 //axios异步向后端请求数据验证
                 checkToken(token)
                     .then(response => {
-                    console.log(response.data.checkResult)
                     if(!response.data.checkResult){
                         console.log('校验失败')
                         next({path:'/error'})

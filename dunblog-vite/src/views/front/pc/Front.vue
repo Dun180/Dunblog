@@ -37,10 +37,10 @@ setTimeout(() => {
   window.L2Dwidget.init({
     pluginRootPath: 'live2dw/',
     pluginJsPath: 'lib/',
-    pluginModelPath: 'live2d-widget-model-wanko/assets/',
+    pluginModelPath: 'live2d-widget-model-nito/assets/',
     tagMode: false,
     debug: false,
-    model: { jsonPath: '/live2dw/live2d-widget-model-wanko/assets/wanko.model.json' },
+    model: { jsonPath: '/live2dw/live2d-widget-model-nito/assets/nito.model.json' },
     display: { position: 'left', width: 150, height: 300 },
     mobile: { show: true },
     log: false
