@@ -1,7 +1,6 @@
 package com.dun.service.impl;
 
 import cn.hutool.core.date.DateUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dun.entity.Blog;
@@ -43,7 +42,6 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     @Override
     public List<Map<String, Object>> getCalendarHeatmapData() throws Exception{
         List<Date> dateList = blogMapper.getCalendarHeatmapData();
-        List<String> stringList = new ArrayList<>();
         Map<String, Object> map = new HashMap<>();
         for (Date date: dateList) {
             String str = DateUtil.format(date, "yyyy-MM-dd");

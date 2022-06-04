@@ -1,12 +1,10 @@
 package com.dun.controller;
 
 
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dun.common.lang.Result;
 import com.dun.entity.Comment;
 import com.dun.service.CommentService;
-import com.dun.util.DunUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
