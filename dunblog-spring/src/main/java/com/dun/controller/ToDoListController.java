@@ -28,12 +28,16 @@ public class ToDoListController {
 
     @GetMapping("/today")
     public Result getToDoToday() {
-        String today= DateUtil.today()+" 08:00:00";
-        Date date = DateUtil.parse(today);
-        return Result.succ(toDoListService.list(new QueryWrapper<ToDoList>()
-                .eq("start_time",date)
-                .eq("state",0)
-        ));
+        try {
+                String today= DateUtil.today()+" 08:00:00";
+            Date date = DateUtil.parse(today);
+            return Result.succ(toDoListService.list(new QueryWrapper<ToDoList>()
+                    .eq("start_time",date)
+                    .eq("state",0)));
+//            return Result.succ(today+"  "+date.toString());
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
     }
 
     @PostMapping("/edit")

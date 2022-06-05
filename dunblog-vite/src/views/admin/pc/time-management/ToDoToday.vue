@@ -3,8 +3,8 @@
     <span>今日待办</span>
     <el-button class="card-button" @click="dialogFormVisible = true">添加待办</el-button>
   </div>
-  <div class="page-content" v-for="(item,index) in todoList" :key="index">
-    <div class="box-card">
+  <div class="page-content">
+    <div class="box-card" v-for="(item,index) in todoList" :key="index">
       <div class="matter">
         {{item.matter}}
       </div>
@@ -108,7 +108,8 @@ onMounted(async () => {
   padding: 20px;
   border: 1px solid #e4e7ed;
   border-radius: 5px;
-  box-shadow: 0px 0px 12px rgba(0,0,0,.12)
+  box-shadow: 0px 0px 12px rgba(0,0,0,.12);
+  margin-bottom: 10px;
 }
 .card-button {
   margin-left: auto;

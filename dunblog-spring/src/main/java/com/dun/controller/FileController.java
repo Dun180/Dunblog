@@ -14,8 +14,8 @@ import java.io.OutputStream;
 @RestController
 public class FileController {
 
-    private String imgPath = "D://Code//DunBlog//dunblog-spring//src//main//resources//static//uploadImg";
-//    private String imgPath = "/usr/file";
+//    private String imgPath = "D://Code//DunBlog//dunblog-spring//src//main//resources//static//uploadImg";
+    private String imgPath = "/usr/file";
     /**
      * 文件上传
 
