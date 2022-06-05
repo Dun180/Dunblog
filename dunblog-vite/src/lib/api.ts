@@ -6,6 +6,7 @@ import {CategoryInfo} from "@/models/category";
 import {TagInfo} from "@/models/tag";
 import {DiaryInfo} from "@/models/diary";
 import {CommentInfo} from "@/models/comment";
+import {ToDoListInfo} from "@/models/toDoList";
 
 
 //#region login
@@ -185,5 +186,24 @@ export async function reviewComment(data: Object){
     return await http.post<Result<CommentInfo[]>>("/comment/review",data)
 }
 
+
+//#endregion
+
+//#region toDOList
+
+//获取今日待办
+export async function getToDoToday() {
+    return await http.get<Result<ToDoListInfo[]>>("/todo/today")
+}
+
+//添加待办
+export async function addToDoList(todoList: ToDoListInfo){
+    return await http.post<Result<Object>>("/todo/add",todoList)
+}
+
+//待办编辑
+export async function editToDoList(todoList: ToDoListInfo){
+    return await http.post<Result<Object>>("/todo/edit",todoList)
+}
 
 //#endregion

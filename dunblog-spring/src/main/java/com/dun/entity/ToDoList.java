@@ -18,9 +18,11 @@ public class ToDoList implements Serializable {
     private Integer id;
 
     private String matter;
+    private String tag;
     private Integer state;
     private Integer type;
-    private Date time;
+    private Date startTime;
+    private Date endTime;
 
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
