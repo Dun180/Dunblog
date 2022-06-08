@@ -1,6 +1,7 @@
 package com.dun.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -125,5 +126,17 @@ public class BlogController {
         }catch (Exception e) {
             return Result.fail(e.getMessage());
         }
+    }
+
+    @PostMapping("/search")
+    public Result searchBlog(@RequestBody Map<String,Object> map){
+        try{
+
+            return Result.succ(blogService.list(new QueryWrapper<Blog>().like("title",map.get("searchContent"))));
+
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+
     }
 }

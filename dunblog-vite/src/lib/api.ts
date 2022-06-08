@@ -65,6 +65,11 @@ export async function likeBlog(blogId: number){
 export async function getCalendarHeatmapData() {
     return await http.get<Result<Object>>("/blog/date")
 }
+
+//搜索博客
+export async function searchBlog(searchContent: string){
+    return await http.post<Result<BlogProfile[]>>("/blog/search",{searchContent:searchContent})
+}
 //#endregion
 
 //#region category

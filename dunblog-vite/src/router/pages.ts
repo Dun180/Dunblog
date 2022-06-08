@@ -1,6 +1,7 @@
 export const Pages = {
     BlogList: 'BlogList',
     BlogDetail: 'BlogDetail',
+    BlogSearch: 'BlogSearch',
     Login_Admin:'Login_Admin',
     CategoryList:'CategoryList',
     CategoryDetail:'CategoryDetail',

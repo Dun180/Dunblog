@@ -25,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
                 // component: () => ISMOBILE() ? import("@/views/front/blog/BlogList.vue") : import("@/views/front/category/CategoryList.vue"),
             },
             {
+                path: 'blog/search',
+                name: Pages.BlogSearch,
+                component: () => import("@/views/front/pc/blog/BlogSearch.vue")
+            },
+            {
                 path: 'blog/:blogId',
                 name: Pages.BlogDetail,
                 component: () => import("@/views/front/pc/blog/BlogDetail.vue")

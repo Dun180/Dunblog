@@ -32,13 +32,13 @@
           </el-menu-item>
         </router-link>
         <router-link :to="{name:Pages.Archives}">
-          <el-menu-item index="3" ref="pos">
+          <el-menu-item index="3">
             <i class="iconfont icon-rcd-reconciliation"></i>
             <span>&nbsp;&nbsp;Archives</span>
           </el-menu-item>
         </router-link>
-        <router-link :to="{name:Pages.Archives}">
-          <el-menu-item index="3" ref="pos">
+        <router-link :to="{name:Pages.BlogSearch}">
+          <el-menu-item index="4">
             <i class="iconfont icon-rcd-search"></i>
             <span>&nbsp;&nbsp;Search</span>
           </el-menu-item>
